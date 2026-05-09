@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Mother's Day</title>
+  <meta
+    name="description"
+    content="A playful and heartfelt Mother's Day digital gift made with love."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <div class="loader" id="loader" aria-live="polite">
+    <div class="loader__content glass-card">
+      <div class="loader__hearts" aria-hidden="true">
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+      </div>
+      <p class="eyebrow">For Mom</p>
+      <h1>Loading memories for mom...</h1>
+      <div class="loader__bar" aria-hidden="true">
+        <span id="loaderBar"></span>
+      </div>
+      <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">
+        Soft music: Off
+      </button>
+    </div>
+  </div>
+
+  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
+  <div class="floating-icons" id="floatingIcons" aria-hidden="true"></div>
+
+  <main id="app">
+    <section class="hero section" id="top">
+      <div class="hero__backdrop"></div>
+      <div class="hero__content">
+        <p class="eyebrow hero-reveal">A little digital scrapbook</p>
+        <h1 class="hero__title hero-reveal">Happy Mother’s Day <span>❤</span></h1>
+        <p class="hero__subtitle hero-reveal">A tiny world made just for you</p>
+        <p class="hero__blurb hero-reveal">
+          Every hug, every smile, every quiet sacrifice became a little bit of magic in my life.
+          This is a playful thank-you wrapped in memories.
+        </p>
+        <div class="hero__actions hero-reveal">
+          <a class="cta-button" href="#journey">Start the Journey</a>
+          <button class="ghost-button" id="secretTrigger" type="button">Press for a hidden smile</button>
+        </div>
+      </div>
+      <div class="hero__orbit" aria-hidden="true">
+        <div class="orbit orbit--one"></div>
+        <div class="orbit orbit--two"></div>
+        <div class="hero__heart">❤</div>
+      </div>
+    </section>
+
+    <section class="section intro-panel reveal" id="journey">
+      <div class="glass-card intro-panel__card">
+        <p class="eyebrow">Memory Journey</p>
+        <h2>Five little levels, one very big thank you</h2>
+        <p>
+          Scroll slowly, tap everything cute, and let each level unlock like a warm little chapter.
+        </p>
+      </div>
+    </section>
+
+    <section class="section level reveal" id="level-1">
+      <div class="level__header">
+        <p class="eyebrow">Level 1</p>
+        <h2>The Hug Collector</h2>
+        <p>Tap the floating hearts to reveal sweet little truths that always lived in my heart.</p>
+      </div>
+      <div class="hug-collector glass-card">
+        <div class="hug-collector__playground" id="heartPlayground" aria-label="Heart message game"></div>
+        <div class="hug-collector__message" id="heartMessage">
+          Click a heart and it will whisper a memory.
+        </div>
+      </div>
+    </section>
+
+    <section class="section level reveal" id="level-2">
+      <div class="level__header">
+        <p class="eyebrow">Level 2</p>
+        <h2>Memory Gallery</h2>
+        <p>A soft polaroid scrapbook of beautiful, funny, and home-shaped moments.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Our happy little world" data-image="assets/aa.jpeg" data-caption="One frame, all my comfort in one place.">
+          <img src="assets/aa.jpeg" alt="Family standing together under green trees on a walkway." />
+          <div class="polaroid__caption">
+            <h3>Our happy little world</h3>
+            <p>One frame, all my comfort.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Sunlit elegance" data-image="assets/jhljhnin.jpeg" data-caption="Grace, sunshine, and the kind of presence that makes every place brighter.">
+          <img src="assets/jhljhnin.jpeg" alt="Mom standing on a terrace in a white and blue dress under a bright sky." />
+          <div class="polaroid__caption">
+            <h3>Sunlit elegance</h3>
+            <p>Grace in the softest light.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Playful sunset" data-image="assets/kk.jpeg" data-caption="The kind of moment that feels like friendship and motherhood at the same time.">
+          <img src="assets/kk.jpeg" alt="Mom and child making playful peace sign poses at sunset." />
+          <div class="polaroid__caption">
+            <h3>Playful sunset</h3>
+            <p>Joy always looked easy with you.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Rest mode" data-image="assets/kkkk.jpeg" data-caption="Proof that even rest looks beautiful when you finally let yourself relax.">
+          <img src="assets/kkkk.jpeg" alt="Mom relaxing on a hammock in a green garden." />
+          <div class="polaroid__caption">
+            <h3>Rest mode</h3>
+            <p>Your calm is its own kind of beauty.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Mountain glow" data-image="assets/niju.jpeg" data-caption="Strong, gentle, and quietly glowing exactly like you always do.">
+          <img src="assets/niju.jpeg" alt="Mom sitting outdoors with mountains in the background." />
+          <div class="polaroid__caption">
+            <h3>Mountain glow</h3>
+            <p>Strong and soft, always.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Candlelight hug" data-image="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" data-caption="A hug that says more than a thousand long speeches ever could.">
+          <img src="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" alt="Mother and child hugging during a candlelit celebration." />
+          <div class="polaroid__caption">
+            <h3>Candlelight hug</h3>
+            <p>Love looked like this.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Family sparkle" data-image="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" data-caption="A full-family smile that feels like a safe place I can return to forever.">
+          <img src="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" alt="Family selfie smiling together during a celebration." />
+          <div class="polaroid__caption">
+            <h3>Family sparkle</h3>
+            <p>Together is my favorite feeling.</p>
+          </div>
+        </article>
+        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory City in the clouds" data-image="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" data-caption="Poised, proud, and full of that quiet confidence I always admired.">
+          <img src="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" alt="Mom seated at a glass table with a mountain view behind her." />
+          <div class="polaroid__caption">
+            <h3>City in the clouds</h3>
+            <p>My forever inspiration.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section level reveal" id="level-3">
+      <div class="level__header">
+        <p class="eyebrow">Level 3</p>
+        <h2>Reasons Why I Love You</h2>
+        <p>Flip the cards. Every side tells a truth I hope life reminds you of every day.</p>
+      </div>
+      <div class="reasons-grid" id="reasonsGrid">
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your strength</span>
+            <span class="flip-card__back">You carried more than anyone saw, and still gave softness.</span>
+          </span>
+        </button>
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your smile</span>
+            <span class="flip-card__back">It turns ordinary days into safe and golden places.</span>
+          </span>
+        </button>
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your sacrifices</span>
+            <span class="flip-card__back">So much of who I am was built from all you quietly gave.</span>
+          </span>
+        </button>
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your hugs</span>
+            <span class="flip-card__back">No matter what happens, they still feel like home to me.</span>
+          </span>
+        </button>
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your patience</span>
+            <span class="flip-card__back">You loved me through every messy stage with grace.</span>
+          </span>
+        </button>
+        <button class="flip-card" type="button">
+          <span class="flip-card__inner">
+            <span class="flip-card__front">Your belief</span>
+            <span class="flip-card__back">You saw my light before I learned how to see it myself.</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section level reveal" id="level-4">
+      <div class="level__header">
+        <p class="eyebrow">Level 4</p>
+        <h2>Catch the Hearts</h2>
+        <p>Move the basket with your mouse or finger and catch the falling hearts.</p>
+      </div>
+      <div class="game glass-card">
+        <div class="game__topbar">
+          <div class="game__score">Score: <span id="scoreValue">0</span></div>
+          <button class="ghost-button" id="startGame" type="button">Start Mini Game</button>
+        </div>
+        <div class="game__arena" id="gameArena" aria-label="Heart catching mini game">
+          <div class="game__basket" id="basket">❤</div>
+          <div class="game__overlay" id="gameOverlay">
+            <p>Catch 12 hearts to unlock the final message.</p>
+          </div>
+        </div>
+        <p class="game__note" id="gameNote">Ready when you are.</p>
+      </div>
+    </section>
+
+    <section class="section finale reveal" id="level-5">
+      <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+      <div class="level__header">
+        <p class="eyebrow">Level 5</p>
+        <h2>Final Message</h2>
+      </div>
+      <div class="finale__card glass-card">
+        <p class="typewriter" id="typewriterText"></p>
+        <p class="finale__wish">Happy Mother’s Day ❤</p>
+        <div class="finale__heart" aria-hidden="true">❤</div>
+        <p class="finale__made">Made with love</p>
+        <button class="cta-button" id="replayButton" type="button">Replay the Journey</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="photoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__backdrop" data-close-modal="true"></div>
+    <div class="modal__card glass-card">
+      <button class="modal__close" id="closeModal" type="button" aria-label="Close photo view">×</button>
+      <img id="modalImage" src="" alt="" />
+      <h3 id="modalTitle">Memory</h3>
+      <p id="modalCaption"></p>
+    </div>
+  </div>
+
+  <div class="secret-toast" id="secretToast" role="status" aria-live="polite">
+    Secret unlocked: If moms were a superpower, you’d be the whole universe.
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
