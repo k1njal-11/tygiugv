@@ -13,8 +13,8 @@
       --ink: #161616;
       --ink-deep: #0e0e0e;
       --lime: #c1fd42;
-      --pink: #f982fb;
-      --violet: #564cf8;
+      --pink: #f6a824; /* poster tape amber (ref 1) — replaces the old pink */
+      --violet: #2e3fe0; /* Kasparov royal blue (ref 1) — replaces the old violet */
       --blue: #2e3fe0;
       --smear: #a688e8;
       --cream: #f0ecdf;
@@ -251,7 +251,7 @@
     .hero {
       position: relative;
       background:
-        radial-gradient(ellipse 900px 500px at 85% 0%, rgba(86,76,248,.28), transparent 60%),
+        radial-gradient(ellipse 900px 500px at 85% 0%, rgba(46,63,224,.28), transparent 60%),
         radial-gradient(ellipse 700px 420px at 0% 100%, rgba(193,253,66,.10), transparent 60%),
         var(--ink);
       padding: 158px 0 0;
@@ -277,8 +277,8 @@
     .hero::after {
       width: 300px; height: 300px;
       bottom: 120px; right: -60px;
-      background: radial-gradient(circle, rgba(249,130,251,.4) 0 3px, transparent 4px),
-                  radial-gradient(circle at 60% 70%, rgba(249,130,251,.3) 0 2px, transparent 3px);
+      background: radial-gradient(circle, rgba(246,168,36,.4) 0 3px, transparent 4px),
+                  radial-gradient(circle at 60% 70%, rgba(246,168,36,.3) 0 2px, transparent 3px);
       background-size: 28px 28px, 17px 17px;
       opacity: .4;
     }
@@ -304,7 +304,7 @@
     .hero h1 .row { display: block; position: relative; }
     .hero h1 .scratch { /* scratchy yellow words like "DANCE INTENSIVE" */
       color: var(--lime);
-      text-shadow: 4px 4px 0 rgba(86,76,248,.55);
+      text-shadow: 4px 4px 0 rgba(46,63,224,.55);
       transform: rotate(-1.2deg);
       display: inline-block;
     }
@@ -402,7 +402,7 @@
       padding: 26px 24px 22px;
       transform: rotate(2deg);
       clip-path: polygon(2% 1%, 98% 0%, 100% 97%, 96% 100%, 1% 99%, 0% 4%);
-      box-shadow: 12px 12px 0 rgba(86,76,248,.7);
+      box-shadow: 12px 12px 0 rgba(46,63,224,.7);
     }
     .hero__card::before { /* plastic-wrap sheen */
       content: "";
@@ -527,7 +527,7 @@
       padding: 110px 0 100px;
       position: relative;
       background:
-        radial-gradient(circle at 88% 12%, rgba(86,76,248,.14), transparent 40%),
+        radial-gradient(circle at 88% 12%, rgba(46,63,224,.14), transparent 40%),
         var(--cream);
       color: var(--ink);
       overflow: hidden;
@@ -803,7 +803,7 @@
       padding: 110px 0 120px;
       position: relative;
       background:
-        radial-gradient(ellipse 700px 400px at 100% 100%, rgba(86,76,248,.25), transparent 60%),
+        radial-gradient(ellipse 700px 400px at 100% 100%, rgba(46,63,224,.25), transparent 60%),
         var(--ink);
       overflow: hidden;
     }
@@ -1133,13 +1133,13 @@
         </article>
         <article class="how-card">
           <span class="num">step _02</span>
-          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#f982fb" stroke-width="2.5" aria-hidden="true"><path d="M17 3 L21 13 L31 13 L23 20 L26 31 L17 24 L8 31 L11 20 L3 13 L13 13 Z"/></svg>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#f6a824" stroke-width="2.5" aria-hidden="true"><path d="M17 3 L21 13 L31 13 L23 20 L26 31 L17 24 L8 31 L11 20 L3 13 L13 13 Z"/></svg>
           <h3>Face the chaos</h3>
           <p>A client changes the brief. A teammate pushes back. The deadline moves up. Built from the real thing.</p>
         </article>
         <article class="how-card">
           <span class="num">step _03</span>
-          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#564cf8" stroke-width="2.5" aria-hidden="true"><path d="M4 30 C10 8, 24 8, 30 30" /><path d="M11 30 C14 18, 20 18, 23 30"/></svg>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#2e3fe0" stroke-width="2.5" aria-hidden="true"><path d="M4 30 C10 8, 24 8, 30 30" /><path d="M11 30 C14 18, 20 18, 23 30"/></svg>
           <h3>Get coached</h3>
           <p>Corporate mentors replay your moves with you. What landed, what flopped — no grades, just growth.</p>
         </article>
@@ -1337,11 +1337,11 @@
               <line x1="16" y1="58" x2="88" y2="58"/>
               <line x1="16" y1="98" x2="88" y2="98"/>
               <rect x="22" y="40" width="14" height="18" fill="#c1fd42" stroke="#161616"/>
-              <rect x="44" y="40" width="14" height="18" fill="#f982fb" stroke="#161616"/>
-              <rect x="66" y="40" width="14" height="18" fill="#564cf8" stroke="#161616"/>
-              <rect x="22" y="80" width="14" height="18" fill="#564cf8" stroke="#161616"/>
+              <rect x="44" y="40" width="14" height="18" fill="#f6a824" stroke="#161616"/>
+              <rect x="66" y="40" width="14" height="18" fill="#2e3fe0" stroke="#161616"/>
+              <rect x="22" y="80" width="14" height="18" fill="#2e3fe0" stroke="#161616"/>
               <rect x="44" y="80" width="14" height="18" fill="#c1fd42" stroke="#161616"/>
-              <rect x="66" y="80" width="14" height="18" fill="#f982fb" stroke="#161616"/>
+              <rect x="66" y="80" width="14" height="18" fill="#f6a824" stroke="#161616"/>
               <g class="item-b4">
                 <rect x="30" y="120" width="22" height="14" fill="#c1fd42" stroke="#161616"/>
                 <text x="41" y="130.5" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" font-weight="700" fill="#161616" stroke="none">B4</text>
