@@ -739,6 +739,7 @@
       text-align: center;
     }
     .form-success.show { display: block; }
+    .form-error { background: var(--pink); }
     @media (max-width: 900px) { .lead__grid { grid-template-columns: 1fr; } }
     @media (max-width: 560px) { .field--row { grid-template-columns: 1fr; } }
 
@@ -1153,11 +1154,16 @@
           <span class="tape tape--pink">limited seats</span>
           <span class="tape tape--ink tape-b">future. proof. yourself.</span>
           <!--
-            Lead capture: point the action at your endpoint (Formspree, Getform,
-            Google Apps Script, or your own backend) and remove the JS demo handler.
-            e.g. action="https://formspree.io/f/YOUR_ID" method="POST"
+            Lead capture via FormSubmit.co — entries are emailed to
+            connect.altiora@gmail.com. The first-ever submission sends a
+            one-time activation email to that inbox; click "Activate" once
+            and every entry after that is delivered automatically.
           -->
-          <form id="leadForm" novalidate>
+          <form id="leadForm" action="https://formsubmit.co/connect.altiora@gmail.com" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New Altiora lead — landing page" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
             <span class="mono">Altiora / lead.capture _v1</span>
             <div class="field">
               <label for="name">Full name</label>
@@ -1200,6 +1206,9 @@
             <div class="form-success" id="formSuccess" role="status">
               ✦ You're in. Check your inbox — your playbook and cohort invite are on the way.
             </div>
+            <div class="form-success form-error" id="formError" role="alert">
+              ✖ Something glitched. Please try again — or email us at connect.altiora@gmail.com.
+            </div>
             <p class="form-note">By signing up you agree to hear from Altiora. Unsubscribe anytime.</p>
           </form>
         </div>
@@ -1238,14 +1247,30 @@
       floatCta.classList.toggle('show', pastHero && !nearForm);
     }, { passive: true });
 
-    // demo form handler — replace with your real endpoint (see comment above the form)
-    document.getElementById('leadForm').addEventListener('submit', (e) => {
+    // lead capture — submits via FormSubmit's AJAX endpoint so the page never reloads
+    document.getElementById('leadForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      document.getElementById('formSuccess').classList.add('show');
-      form.querySelector('button[type="submit"]').textContent = 'Submitted ✦';
-      form.querySelectorAll('input, select, button').forEach((el) => el.disabled = true);
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      document.getElementById('formError').classList.remove('show');
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/connect.altiora@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (!res.ok) throw new Error('submit failed');
+        document.getElementById('formSuccess').classList.add('show');
+        button.textContent = 'Submitted ✦';
+        form.querySelectorAll('input, select, button').forEach((el) => el.disabled = true);
+      } catch (err) {
+        document.getElementById('formError').classList.add('show');
+        button.disabled = false;
+        button.textContent = 'Send me the playbook ↗';
+      }
     });
   </script>
 </body>
