@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALTIORA — Turn Soft Skills Into Your Bleeding Edge</title>
   <meta name="description" content="Altiora runs career simulations that mirror real corporate life, so school and college students build the soft skills that become their unfair advantage." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23161616'/%3E%3Cpath d='M50 8 L58 42 L92 50 L58 58 L50 92 L42 58 L8 50 L42 42 Z' fill='%23c1fd42'/%3E%3C/svg%3E" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Altiora" />
+  <meta property="og:title" content="ALTIORA — Turn Soft Skills Into Your Bleeding Edge" />
+  <meta property="og:description" content="Career simulations that mirror real corporate life — so students build the soft skills no textbook teaches, before their career begins." />
+  <meta property="og:url" content="https://tygiugv.vercel.app/" />
+  <meta property="og:image" content="https://tygiugv.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ALTIORA — Turn Soft Skills Into Your Bleeding Edge" />
+  <meta name="twitter:description" content="Career simulations that mirror real corporate life — practice the job before the job." />
+  <meta name="twitter:image" content="https://tygiugv.vercel.app/og.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
@@ -174,6 +187,60 @@
     .doodle { position: absolute; pointer-events: none; }
     .spin { animation: spin 16s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── interactive fold system: object is the hero, content unfolds from it ── */
+    .fold-hero {
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+      margin: 10px 0 26px;
+      text-align: center;
+    }
+    .obj { cursor: pointer; transition: transform .25s ease, filter .25s ease; }
+    .obj:hover { transform: translateY(-5px) scale(1.015); filter: drop-shadow(0 14px 22px rgba(0,0,0,.35)); }
+    .fold-prompt {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 1.5px solid currentColor;
+      padding: 8px 18px;
+      opacity: .9;
+      animation: prompt-pulse 2.2s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes prompt-pulse { 50% { transform: scale(1.06); opacity: .55; } }
+    .fold .fold-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows .85s cubic-bezier(.25,.8,.25,1), opacity .6s ease .12s;
+    }
+    .fold .fold-content > .fold-inner { overflow: hidden; min-height: 0; }
+    .fold.open .fold-content { grid-template-rows: 1fr; opacity: 1; }
+    .fold.open .fold-prompt { display: none; }
+    .fold.open .obj { cursor: default; }
+
+    /* booth door squeezes open, elevator doors part, vending dispenses */
+    .booth .door, .elevator .el-l, .elevator .el-r, .vending .book {
+      transform-box: fill-box;
+      transition: transform .8s cubic-bezier(.6,0,.2,1) .1s;
+    }
+    .booth .door { transform-origin: 0% 50%; }
+    .open .booth .door { transform: scaleX(.1); }
+    .elevator .el-l { transform-origin: 0% 50%; }
+    .elevator .el-r { transform-origin: 100% 50%; }
+    .open .elevator .el-l, .open .elevator .el-r { transform: scaleX(.08); }
+    .vending .book { transition-delay: .35s; transition-timing-function: cubic-bezier(.3,1.5,.5,1); }
+    .open .vending .book { transform: translateY(52px) rotate(7deg); }
+    .open .eli5__ticket { transform: rotate(-3.5deg) translateY(-8px); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fold .fold-content { transition: none; }
+      .fold-prompt { animation: none; }
+    }
 
     /* museum-plate captions for the symbolic objects */
     .fig {
@@ -507,6 +574,11 @@
       .hero__deck { grid-template-columns: 1fr; }
       .hero__right { max-width: 460px; margin-top: 10px; }
     }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(48px, 15.5vw, 62px); }
+      .sfx-toggle { font-size: 10px; padding: 6px 10px; bottom: 14px; left: 14px; }
+      .float-cta { font-size: 11px; padding: 10px 14px; bottom: 14px; right: 14px; }
+    }
     @media (max-width: 640px) {
       .hero { padding-top: 124px; }
       .hero__stats { grid-template-columns: 1fr; }
@@ -583,6 +655,9 @@
       font-size: .82em;
     }
     .eli5__story { font-size: 18px; display: grid; gap: 18px; max-width: 560px; }
+    .eli5__story--center { max-width: 640px; margin: 26px auto 0; text-align: center; }
+    .eli5 .eli5__ticket { max-width: 500px; }
+    .eli5 h2 { margin-bottom: 34px; }
     .eli5__story .big { font-size: 21px; font-weight: 600; }
     .eli5__story .big mark { background: var(--lime); padding: 0 4px; }
     .eli5__story p mark { background: var(--pink); padding: 0 4px; }
@@ -837,9 +912,13 @@
     .lead__perks { list-style: none; display: grid; gap: 12px; font-family: var(--font-mono); font-size: 13px; }
     .lead__perks li { display: flex; gap: 12px; align-items: baseline; }
     .lead__perks li::before { content: "[✓]"; color: var(--lime); font-weight: 700; }
-    .lead__vending { display: flex; align-items: flex-end; gap: 24px; margin-top: 36px; }
-    .lead__vending .vending { flex: 0 0 auto; width: 128px; color: var(--cream); }
-    .lead__vending .fig { max-width: 240px; margin-top: 0; align-self: center; }
+    .lead__right { display: grid; gap: 6px; }
+    .lead__grid { align-items: start; }
+    .fold-hero .vending { width: 250px; }
+    .fold-hero .booth { width: 185px; }
+    .fold-hero .elevator { width: 215px; }
+    .fold-hero .fig { text-align: center; max-width: 420px; }
+    .lead .fold-content .lead__form-shell { margin-top: 30px; }
     .lead__form-shell { position: relative; }
     .lead__form-shell .tape { position: absolute; top: -14px; left: 34px; z-index: 2; transform: rotate(-3deg); }
     .lead__form-shell .tape-b { top: auto; left: auto; bottom: -12px; right: 24px; transform: rotate(3deg); }
@@ -1111,23 +1190,16 @@
   </div>
 
   <!-- ═══ ELI5 ═══ -->
-  <section class="eli5" id="what">
+  <section class="eli5 fold" id="what" data-sfx="rip">
     <div class="eli5__halftone" aria-hidden="true"></div>
     <svg class="doodle d-star-eli5 spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
     <svg class="doodle d-bolt-2" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-bolt"/></svg>
     <div class="wrap">
       <div class="section-tag">01 — What is a career simulation?</div>
-      <div class="eli5__grid">
-        <div class="reveal">
-          <h2>Okay. You're five.<br /><em>Here's</em> the <span class="blob">deal.</span></h2>
-          <div class="eli5__story">
-            <p class="big">You know how you play <mark>"office-office"</mark> with your friends — someone's the boss, someone sells the toys?</p>
-            <p>A career simulation is that game, made to feel <strong>real</strong>. Real projects, real deadlines, a real "boss", a teammate who disagrees with you. But because it's a game, <mark>you can't actually lose</mark> — mess up the pitch, nobody gets fired. You just try again, better.</p>
-            <p>Do that enough times, and when the real world shows up… it feels like a game you've already played. <strong>That's the edge.</strong></p>
-          </div>
-        </div>
+      <h2 class="reveal" style="text-align:center">Okay. You're five.<br /><em>Here's</em> the <span class="blob">deal.</span></h2>
 
-        <div class="eli5__ticket reveal">
+      <div class="fold-hero reveal">
+        <div class="eli5__ticket obj" role="button" tabindex="0" aria-label="Tear the ticket to reveal the story">
           <span class="tape tape--ink">get ja head start</span>
           <span class="mono-top">✂ admit one — sáb 18h30 ✂</span>
           <h3>Practice life <span class="cap">before</span><br />life happens.</h3>
@@ -1139,12 +1211,23 @@
           </ul>
           <div class="mono"><span>Altiora / sim.v1</span><span>pr. your future self</span></div>
         </div>
+        <span class="fold-prompt">✂ tap the ticket to tear in</span>
+      </div>
+
+      <div class="fold-content">
+        <div class="fold-inner">
+          <div class="eli5__story eli5__story--center">
+            <p class="big">You know how you play <mark>"office-office"</mark> with your friends — someone's the boss, someone sells the toys?</p>
+            <p>A career simulation is that game, made to feel <strong>real</strong>. Real projects, real deadlines, a real "boss", a teammate who disagrees with you. But because it's a game, <mark>you can't actually lose</mark> — mess up the pitch, nobody gets fired. You just try again, better.</p>
+            <p>Do that enough times, and when the real world shows up… it feels like a game you've already played. <strong>That's the edge.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ HOW IT WORKS ═══ -->
-  <section class="how" id="how">
+  <section class="how fold" id="how" data-sfx="ring">
     <svg class="doodle d-globe-how" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-globe"/></svg>
     <div class="wrap">
       <div class="how__head">
@@ -1154,6 +1237,32 @@
         </div>
         <span class="mono">be in flow. // no rules, just intention</span>
       </div>
+
+      <div class="fold-hero reveal">
+        <svg class="booth obj" viewBox="0 0 170 312" role="button" tabindex="0" aria-label="Open the booth to reveal the four steps" style="overflow:visible">
+          <rect x="10" y="10" width="150" height="292" rx="10" fill="none" stroke="#f6a824" stroke-width="12" stroke-linejoin="round"/>
+          <rect x="10" y="10" width="150" height="292" rx="8" fill="#f6a824" stroke="#161616" stroke-width="4"/>
+          <rect x="10" y="10" width="150" height="292" rx="8" fill="url(#ht)" />
+          <rect x="24" y="24" width="122" height="34" fill="#161616"/>
+          <text x="85" y="47" text-anchor="middle" font-family="Space Mono, monospace" font-size="17" font-weight="700" fill="#c1fd42" letter-spacing="4">SIM</text>
+          <rect x="28" y="70" width="114" height="212" fill="#0e0e0e" stroke="#161616" stroke-width="4"/>
+          <rect x="34" y="78" width="102" height="196" fill="#c1fd42"/>
+          <path d="M85 130 L85 226 M85 130 l-16 18 M85 130 l16 18" stroke="#161616" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <g class="door">
+            <rect x="32" y="74" width="106" height="204" fill="#f0ecdf" stroke="#161616" stroke-width="4"/>
+            <rect x="32" y="74" width="106" height="204" fill="url(#ht)"/>
+            <line x1="85" y1="74" x2="85" y2="278" stroke="#161616" stroke-width="3"/>
+            <line x1="32" y1="142" x2="138" y2="142" stroke="#161616" stroke-width="3"/>
+            <line x1="32" y1="210" x2="138" y2="210" stroke="#161616" stroke-width="3"/>
+            <circle cx="128" cy="180" r="4" fill="#161616"/>
+          </g>
+          <rect x="4" y="302" width="162" height="8" fill="#161616"/>
+        </svg>
+        <span class="fold-prompt">knock — the booth opens</span>
+        <span class="fig">fig. 02 — step in a student. step out a professional.</span>
+      </div>
+
+      <div class="fold-content"><div class="fold-inner">
       <div class="how__cards stagger">
         <article class="how-card">
           <span class="num">step _01</span>
@@ -1181,44 +1290,48 @@
         </article>
       </div>
 
-      <div class="how__foot reveal">
-        <svg class="booth" viewBox="0 0 110 210" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="overflow:visible">
-          <path d="M8 202 L8 26 C8 12 20 6 55 6 C90 6 102 12 102 26 L102 202 Z" stroke="#f6a824" stroke-width="10" stroke-linejoin="round"/>
-          <path d="M8 202 L8 26 C8 12 20 6 55 6 C90 6 102 12 102 26 L102 202" />
-          <line x1="2" y1="202" x2="108" y2="202" stroke-width="4"/>
-          <g class="sign">
-            <rect x="20" y="14" width="70" height="18" fill="#c1fd42" stroke="none"/>
-            <text x="55" y="27.5" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" font-weight="700" fill="#161616" stroke="none" letter-spacing="3">SIM</text>
-          </g>
-          <rect x="22" y="42" width="66" height="150"/>
-          <line x1="44" y1="42" x2="44" y2="192"/>
-          <line x1="66" y1="42" x2="66" y2="192"/>
-          <line x1="22" y1="80" x2="88" y2="80"/>
-          <line x1="22" y1="118" x2="88" y2="118"/>
-          <line x1="22" y1="156" x2="88" y2="156"/>
-          <rect x="22" y="42" width="66" height="150" fill="url(#ht-light)" stroke="none"/>
-          <circle cx="94" cy="120" r="2.5" fill="currentColor" stroke="none"/>
-        </svg>
+      <div class="how__foot">
         <div class="how__foot-copy">
           <span class="hand">step in a student.<br />step out a professional.</span>
-          <span class="fig">fig. 02 — the booth changes whoever enters it. ours just uses deadlines instead of dial tones.</span>
         </div>
         <div class="holo" aria-hidden="true">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><use href="#shape-globe"/></svg>
           <b>ALT</b>
         </div>
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ═══ VALUE ═══ -->
-  <section class="value" id="value">
+  <section class="value fold" id="value" data-sfx="ding">
     <svg class="doodle d-ast-value spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
     <div class="wrap">
+      <div class="section-tag">03 — Why it matters</div>
+      <h2 class="reveal" style="text-align:center">Grades open doors.<br /><span class="hl">Soft skills</span> keep them open.</h2>
+
+      <div class="fold-hero reveal">
+        <svg class="elevator obj" viewBox="0 0 210 312" role="button" tabindex="0" aria-label="Open the elevator doors to reveal the numbers" style="overflow:visible">
+          <rect x="10" y="10" width="190" height="292" rx="10" fill="none" stroke="#f6a824" stroke-width="12" stroke-linejoin="round"/>
+          <rect x="10" y="10" width="190" height="292" rx="8" fill="#161616" stroke="#0e0e0e" stroke-width="4"/>
+          <rect x="10" y="10" width="190" height="292" rx="8" fill="url(#ht-light)"/>
+          <rect x="66" y="24" width="78" height="30" fill="#0e0e0e" stroke="#f0ecdf" stroke-width="2"/>
+          <text x="105" y="45" text-anchor="middle" font-family="Space Mono, monospace" font-size="15" font-weight="700" fill="#c1fd42" letter-spacing="2">▲ ALT</text>
+          <rect x="30" y="70" width="150" height="212" fill="#c1fd42" stroke="#161616" stroke-width="3"/>
+          <path d="M105 118 L105 240 M105 118 l-22 26 M105 118 l22 26" stroke="#161616" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <rect class="el-l" x="30" y="70" width="75" height="212" fill="#f0ecdf" stroke="#161616" stroke-width="3"/>
+          <rect class="el-l" x="30" y="70" width="75" height="212" fill="url(#ht)"/>
+          <rect class="el-r" x="105" y="70" width="75" height="212" fill="#f0ecdf" stroke="#161616" stroke-width="3"/>
+          <rect class="el-r" x="105" y="70" width="75" height="212" fill="url(#ht)"/>
+          <rect x="4" y="302" width="202" height="8" fill="#0e0e0e"/>
+        </svg>
+        <span class="fold-prompt">tap — doors are opening up</span>
+        <span class="fig">fig. 03 — altiora, latin: "higher things." the only direction this goes.</span>
+      </div>
+
+      <div class="fold-content"><div class="fold-inner">
       <div class="value__grid">
         <div class="reveal">
-          <div class="section-tag">03 — Why it matters</div>
-          <h2>Grades open doors.<br /><span class="hl">Soft skills</span> keep them open.</h2>
           <p class="value__lead">
             AI can write the code and crunch the numbers. It can't read a room,
             win trust, or rally a team. In every field, the people who rise are
@@ -1247,11 +1360,12 @@
           </div>
         </div>
       </div>
+      </div></div>
     </div>
   </section>
 
   <!-- ═══ PROOF — spiky burst + crowns ═══ -->
-  <section class="proof" id="proof">
+  <section class="proof fold" id="proof" data-sfx="thock">
     <div class="proof__margin-notes" aria-hidden="true">
       beat the ordinary ✎<br />rating: 2851<br />#softskillsclub<br />world champions<br />of being human
     </div>
@@ -1263,8 +1377,8 @@
         <p>Every one of these names had rivals with equal talent. What separated them was a <mark>soft skill sharpened into a weapon</mark>. Yours is waiting.</p>
       </div>
 
-      <div class="chess reveal">
-        <svg viewBox="0 0 600 210" fill="none" aria-hidden="true">
+      <div class="chess reveal fold-hero">
+        <svg class="obj" viewBox="0 0 600 210" fill="none" role="button" tabindex="0" aria-label="Make your move to reveal the proof">
           <defs>
             <pattern id="checker" width="100" height="50" patternUnits="userSpaceOnUse">
               <rect width="50" height="25" fill="#161616"/>
@@ -1306,7 +1420,9 @@
           <text x="522" y="120" font-family="Caveat, cursive" font-size="26" font-weight="700" fill="#161616" transform="rotate(-4 522 120)">+2851</text>
         </svg>
         <span class="fig">fig. 01 — same board. same pieces. the player is the edge.</span>
+        <span class="fold-prompt">tap the board — make your move</span>
       </div>
+      <div class="fold-content"><div class="fold-inner">
       <div class="proof__grid stagger">
         <article class="proof-card">
           <span class="tape">storytelling</span>
@@ -1341,6 +1457,7 @@
           <p>"Captain Cool" won World Cups with the same heartbeat in the last over as the first. Composure is trainable.</p>
         </article>
       </div>
+      </div></div>
     </div>
   </section>
 
@@ -1352,7 +1469,7 @@
   </div>
 
   <!-- ═══ LEAD FORM ═══ -->
-  <section class="lead" id="join">
+  <section class="lead fold" id="join" data-sfx="vend">
     <svg class="doodle d-star-lead spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
     <div class="wrap">
       <div class="lead__grid">
@@ -1370,35 +1487,46 @@
             <li>Personal skill-gap snapshot after your first sim</li>
             <li>Zero spam. Only signal.</li>
           </ul>
-          <div class="lead__vending" aria-hidden="true">
-            <svg class="vending" viewBox="0 0 128 190" fill="none" stroke="currentColor" stroke-width="2.5" style="overflow:visible">
-              <rect x="6" y="6" width="116" height="178" rx="6" stroke="#f6a824" stroke-width="10"/>
-              <rect x="6" y="6" width="116" height="178" rx="6"/>
-              <rect x="6" y="6" width="116" height="178" rx="6" fill="url(#ht-light)" stroke="none"/>
-              <rect x="16" y="18" width="72" height="118"/>
-              <line x1="16" y1="58" x2="88" y2="58"/>
-              <line x1="16" y1="98" x2="88" y2="98"/>
-              <rect x="22" y="40" width="14" height="18" fill="#c1fd42" stroke="#161616"/>
-              <rect x="44" y="40" width="14" height="18" fill="#f6a824" stroke="#161616"/>
-              <rect x="66" y="40" width="14" height="18" fill="#2e3fe0" stroke="#161616"/>
-              <rect x="22" y="80" width="14" height="18" fill="#2e3fe0" stroke="#161616"/>
-              <rect x="44" y="80" width="14" height="18" fill="#c1fd42" stroke="#161616"/>
-              <rect x="66" y="80" width="14" height="18" fill="#f6a824" stroke="#161616"/>
-              <g class="item-b4">
-                <rect x="30" y="120" width="22" height="14" fill="#c1fd42" stroke="#161616"/>
-                <text x="41" y="130.5" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" font-weight="700" fill="#161616" stroke="none">B4</text>
-              </g>
-              <rect x="96" y="30" width="16" height="4" fill="currentColor" stroke="none"/>
-              <circle cx="104" cy="56" r="7"/>
-              <rect x="96" y="76" width="16" height="26" rx="3"/>
-              <rect x="16" y="148" width="72" height="24" rx="3"/>
-              <path d="M28 160 h48" stroke-dasharray="2 5"/>
-            </svg>
-            <span class="fig">fig. 03 — item b4: the playbook. insert curiosity below, collect at the tray.</span>
-          </div>
         </div>
 
-        <div class="lead__form-shell reveal">
+        <div class="lead__right reveal">
+          <div class="fold-hero">
+            <svg class="vending obj" viewBox="0 0 230 332" role="button" tabindex="0" aria-label="Press B4 to dispense the playbook form" style="overflow:visible">
+              <rect x="10" y="10" width="210" height="312" rx="10" fill="none" stroke="#f6a824" stroke-width="12" stroke-linejoin="round"/>
+              <rect x="10" y="10" width="210" height="312" rx="8" fill="#f0ecdf" stroke="#161616" stroke-width="4"/>
+              <rect x="10" y="10" width="210" height="312" rx="8" fill="url(#ht)"/>
+              <rect x="22" y="22" width="186" height="34" fill="#161616"/>
+              <text x="115" y="44" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" font-weight="700" fill="#c1fd42" letter-spacing="2">ALTIORA VENDING</text>
+              <rect x="22" y="68" width="132" height="180" fill="#0e0e0e" stroke="#161616" stroke-width="4"/>
+              <line x1="22" y1="128" x2="154" y2="128" stroke="#f0ecdf" stroke-width="3"/>
+              <line x1="22" y1="188" x2="154" y2="188" stroke="#f0ecdf" stroke-width="3"/>
+              <rect x="32" y="90" width="32" height="36" fill="#c1fd42" stroke="#161616" stroke-width="3"/>
+              <rect x="72" y="90" width="32" height="36" fill="#2e3fe0" stroke="#161616" stroke-width="3"/>
+              <rect x="112" y="90" width="32" height="36" fill="#f6a824" stroke="#161616" stroke-width="3"/>
+              <rect x="32" y="150" width="32" height="36" fill="#f6a824" stroke="#161616" stroke-width="3"/>
+              <rect x="112" y="150" width="32" height="36" fill="#2e3fe0" stroke="#161616" stroke-width="3"/>
+              <g class="book">
+                <rect x="72" y="150" width="32" height="36" fill="#c1fd42" stroke="#161616" stroke-width="3"/>
+                <text x="88" y="173" text-anchor="middle" font-family="Space Mono, monospace" font-size="12" font-weight="700" fill="#161616">B4</text>
+              </g>
+              <rect x="166" y="68" width="42" height="180" fill="#161616"/>
+              <rect x="176" y="80" width="22" height="6" fill="#f0ecdf"/>
+              <circle cx="187" cy="110" r="9" fill="none" stroke="#f0ecdf" stroke-width="3"/>
+              <g class="item-b4">
+                <rect x="172" y="134" width="30" height="26" rx="4" fill="#c1fd42" stroke="#161616" stroke-width="3"/>
+                <text x="187" y="152" text-anchor="middle" font-family="Space Mono, monospace" font-size="12" font-weight="700" fill="#161616">B4</text>
+              </g>
+              <rect x="176" y="176" width="22" height="40" rx="4" fill="none" stroke="#f0ecdf" stroke-width="3"/>
+              <rect x="22" y="260" width="132" height="46" fill="#0e0e0e" stroke="#161616" stroke-width="4"/>
+              <path d="M36 283 h104" stroke="#f0ecdf" stroke-width="3" stroke-dasharray="3 6"/>
+              <rect x="4" y="322" width="222" height="8" fill="#161616"/>
+            </svg>
+            <span class="fold-prompt">press b4 — the playbook drops</span>
+            <span class="fig">fig. 04 — item b4: insert curiosity, collect at the tray.</span>
+          </div>
+
+          <div class="fold-content"><div class="fold-inner">
+          <div class="lead__form-shell">
           <span class="tape tape--pink">limited seats</span>
           <span class="tape tape--ink tape-b">future. proof. yourself.</span>
           <!--
@@ -1459,6 +1587,8 @@
             </div>
             <p class="form-note">By signing up you agree to hear from Altiora. Unsubscribe anytime.</p>
           </form>
+          </div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -1592,16 +1722,51 @@
     // vending: the dispense thunk
     const dispense = () => { tone(95, { type: 'square', dur: .13, vol: .25 }); noise({ dur: .1, vol: .18, at: .04 }); };
 
-    const chessSvg = document.querySelector('.chess svg');
-    if (chessSvg) chessSvg.addEventListener('click', () => {
-      pieceThock();
-      const kn = chessSvg.querySelector('.knight');
-      if (kn && !reducedMotion) kn.animate([{ translate: '0 0' }, { translate: '0 -14px' }, { translate: '0 0' }], { duration: 380, easing: 'cubic-bezier(.3,1.6,.5,1)' });
+    // paper rip (ticket) and elevator ding
+    const paperRip = () => { noise({ dur: .16, vol: .3 }); tone(320, { type: 'sawtooth', dur: .12, vol: .12, glideTo: 110 }); };
+    const elevatorDing = () => { tone(880, { dur: .4, vol: .16 }); tone(1318, { dur: .55, vol: .1, at: .03 }); };
+    const sfxMap = {
+      rip: paperRip,
+      ring: boothRing,
+      ding: elevatorDing,
+      thock: pieceThock,
+      vend: () => { coinDrop(); setTimeout(dispense, 300); },
+    };
+
+    // ── fold engine: metaphor object is the hero, content unfolds from it ──
+    document.querySelectorAll('section.fold').forEach((sec) => {
+      const obj = sec.querySelector('.obj');
+      const openSec = (withSfx) => {
+        if (sec.classList.contains('open')) return false;
+        sec.classList.add('open');
+        sec.querySelectorAll('.fold-content .reveal, .fold-content .stagger').forEach((el) => el.classList.add('in'));
+        if (withSfx) (sfxMap[sec.dataset.sfx] || (() => {}))();
+        return true;
+      };
+      if (reducedMotion) { openSec(false); return; }
+      if (obj) {
+        const interact = () => {
+          const first = openSec(true);
+          if (!first) (sfxMap[sec.dataset.sfx] || (() => {}))();
+          const kn = sec.querySelector('.knight');
+          if (kn) kn.animate([{ translate: '0 0' }, { translate: '0 -14px' }, { translate: '0 0' }], { duration: 380, easing: 'cubic-bezier(.3,1.6,.5,1)' });
+        };
+        obj.addEventListener('click', interact);
+        obj.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); interact(); } });
+      }
+      // fallback: unfold quietly only if the visitor lingers without clicking
+      let lingerTimer;
+      const watcher = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            lingerTimer = setTimeout(() => { openSec(false); watcher.unobserve(sec); }, 4500);
+          } else {
+            clearTimeout(lingerTimer);
+          }
+        });
+      }, { threshold: 0.35 });
+      watcher.observe(sec);
     });
-    const booth = document.querySelector('.booth');
-    if (booth) booth.addEventListener('click', boothRing);
-    const vending = document.querySelector('.vending');
-    if (vending) vending.addEventListener('click', coinDrop);
 
     // floating CTA appears after the hero, hides near the form
     const floatCta = document.getElementById('floatCta');
