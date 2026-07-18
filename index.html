@@ -3,256 +3,1250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Mother's Day</title>
-  <meta
-    name="description"
-    content="A playful and heartfelt Mother's Day digital gift made with love."
-  />
+  <title>ALTIORA — Turn Soft Skills Into Your Bleeding Edge</title>
+  <meta name="description" content="Altiora runs career simulations that mirror real corporate life, so school and college students build the soft skills that become their unfair advantage." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #161616;
+      --ink-deep: #0e0e0e;
+      --lime: #c1fd42;
+      --pink: #f982fb;
+      --violet: #564cf8;
+      --cream: #f0ecdf;
+      --paper: #e8e3d3;
+      --font-display: 'Anton', 'Archivo Black', sans-serif;
+      --font-black: 'Archivo Black', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    ::selection { background: var(--lime); color: var(--ink); }
+
+    /* ═══ film grain over everything ═══ */
+    .grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: .6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      animation: grain 8s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%, 100% { transform: translate(0,0); }
+      10% { transform: translate(-5%,-8%); }
+      30% { transform: translate(3%,-12%); }
+      50% { transform: translate(9%,4%); }
+      70% { transform: translate(-7%,9%); }
+      90% { transform: translate(2%,6%); }
+    }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; }
+
+    /* ═══ shared collage bits ═══ */
+    .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* torn-tape strips, like "k-pop / afro / dance mix" on the poster */
+    .tape {
+      display: inline-block;
+      font-family: var(--font-black);
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: lowercase;
+      background: var(--lime);
+      color: var(--ink);
+      padding: 7px 18px;
+      clip-path: polygon(0% 22%, 4% 2%, 97% 0%, 100% 74%, 96% 100%, 2% 92%);
+      box-shadow: 3px 4px 0 rgba(0,0,0,.45);
+      white-space: nowrap;
+    }
+    .tape--pink { background: var(--pink); }
+    .tape--violet { background: var(--violet); color: var(--cream); }
+    .tape--cream { background: var(--cream); color: var(--ink); }
+    .tape--ink { background: var(--ink); color: var(--lime); outline: 1px solid var(--lime); }
+
+    .barcode {
+      height: 34px;
+      width: 130px;
+      background: repeating-linear-gradient(90deg,
+        currentColor 0 2px, transparent 2px 4px,
+        currentColor 4px 7px, transparent 7px 9px,
+        currentColor 9px 10px, transparent 10px 14px,
+        currentColor 14px 18px, transparent 18px 20px);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--lime);
+      border: 2px solid var(--ink);
+      padding: 16px 28px;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 var(--violet);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--violet); }
+    .btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--violet); }
+    .btn--cream { background: var(--cream); box-shadow: 5px 5px 0 var(--pink); }
+    .btn--cream:hover { box-shadow: 8px 8px 0 var(--pink); }
+    .btn--ghost { background: transparent; color: var(--cream); border-color: var(--cream); box-shadow: 5px 5px 0 var(--lime); }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+      padding: 7px 14px;
+      margin-bottom: 28px;
+    }
+    .section-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--violet); }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: .92; letter-spacing: .01em; }
+
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* floating doodles */
+    .doodle { position: absolute; pointer-events: none; }
+    .spin { animation: spin 16s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* torn paper edges between sections */
+    .rip { display: block; height: 26px; position: relative; z-index: 5; }
+    .rip svg { display: block; width: 100%; height: 100%; }
+
+    /* ═══ nav ═══ */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(240,236,223,.15);
+    }
+    .topbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 24px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: .04em;
+      color: var(--cream);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .logo sup { font-family: var(--font-mono); font-size: 10px; color: var(--lime); }
+    .topbar__links { display: flex; gap: 28px; }
+    .topbar__links a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: .8;
+    }
+    .topbar__links a:hover { opacity: 1; color: var(--lime); }
+    .topbar .btn { padding: 10px 18px; font-size: 12px; box-shadow: 3px 3px 0 var(--violet); }
+    @media (max-width: 860px) { .topbar__links { display: none; } }
+
+    /* ═══ hero — dark collage poster, like the dance intensive flyer ═══ */
+    .hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 900px 500px at 85% 0%, rgba(86,76,248,.28), transparent 60%),
+        radial-gradient(ellipse 700px 420px at 0% 100%, rgba(193,253,66,.10), transparent 60%),
+        var(--ink);
+      padding: 158px 0 0;
+      overflow: hidden;
+    }
+    /* spray-paint splatters */
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 240px; height: 240px;
+      top: 90px; left: -90px;
+      background: radial-gradient(circle, rgba(193,253,66,.5) 0 4px, transparent 5px),
+                  radial-gradient(circle at 30% 60%, rgba(193,253,66,.35) 0 3px, transparent 4px),
+                  radial-gradient(circle at 70% 30%, rgba(193,253,66,.4) 0 2px, transparent 3px);
+      background-size: 34px 34px, 23px 23px, 15px 15px;
+      opacity: .5;
+    }
+    .hero::after {
+      width: 300px; height: 300px;
+      bottom: 120px; right: -60px;
+      background: radial-gradient(circle, rgba(249,130,251,.4) 0 3px, transparent 4px),
+                  radial-gradient(circle at 60% 70%, rgba(249,130,251,.3) 0 2px, transparent 3px);
+      background-size: 28px 28px, 17px 17px;
+      opacity: .4;
+    }
+    .hero__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0 22px;
+      border-bottom: 1px solid rgba(240,236,223,.35);
+      margin-bottom: 46px;
+      flex-wrap: wrap;
+    }
+    .hero__meta .mono { display: flex; align-items: center; gap: 8px; opacity: .85; }
+    .crosshair { color: var(--lime); }
+
+    .hero__stage { position: relative; z-index: 2; }
+    .hero h1 {
+      font-size: clamp(64px, 10.5vw, 168px);
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .hero h1 .row { display: block; position: relative; }
+    .hero h1 .scratch { /* scratchy yellow words like "DANCE INTENSIVE" */
+      color: var(--lime);
+      text-shadow: 4px 4px 0 rgba(86,76,248,.55);
+      transform: rotate(-1.2deg);
+      display: inline-block;
+    }
+    .hero h1 .ghost {
+      color: transparent;
+      -webkit-text-stroke: 2.5px var(--cream);
+    }
+    /* ransom-note word: each letter its own sticker, like "StarT" */
+    .ransom { display: inline-flex; align-items: baseline; }
+    .ransom b {
+      font-family: var(--font-display);
+      font-weight: 400;
+      display: inline-block;
+      padding: 0 .06em;
+      margin-right: .04em;
+      line-height: 1;
+    }
+    .ransom b:nth-child(1) { background: var(--cream); color: var(--ink); transform: rotate(-3deg); }
+    .ransom b:nth-child(2) { background: var(--violet); color: var(--cream); transform: rotate(2deg) translateY(-.04em); }
+    .ransom b:nth-child(3) { background: var(--pink); color: var(--ink); transform: rotate(-2deg); }
+    .ransom b:nth-child(4) { background: var(--lime); color: var(--ink); transform: rotate(3deg) translateY(.03em); }
+    .ransom b:nth-child(5) { background: var(--cream); color: var(--ink); transform: rotate(-1.5deg); }
+
+    /* tape strips crossing the headline, poster style */
+    .hero__tapes { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+    .hero__tapes .tape { position: absolute; }
+    .ht-1 { top: -4%; left: 34%; transform: rotate(-8deg); }
+    .ht-2 { top: 34%; right: 6%; transform: rotate(5deg); }
+    .ht-3 { bottom: 16%; left: 10%; transform: rotate(-4deg); }
+    .ht-4 { bottom: -6%; right: 26%; transform: rotate(7deg); }
+
+    .hero__deck {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: start;
+      margin-top: 38px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero__sub {
+      max-width: 540px;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 32px;
+    }
+    .hero__sub strong { background: var(--violet); padding: 0 5px; }
+    .hero__ctas { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 26px; }
+    .hero__hand {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      color: var(--lime);
+      transform: rotate(-3deg);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero__hand svg { width: 44px; }
+
+    /* clipped photo-frame card, torn sticker border like the flyer cutouts */
+    .hero__card {
+      position: relative;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 26px 24px 22px;
+      transform: rotate(2deg);
+      clip-path: polygon(2% 1%, 98% 0%, 100% 97%, 96% 100%, 1% 99%, 0% 4%);
+      box-shadow: 12px 12px 0 rgba(86,76,248,.7);
+    }
+    .hero__card::before { /* plastic-wrap sheen */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.5) 38%, transparent 44%, transparent 60%, rgba(255,255,255,.35) 68%, transparent 74%);
+      pointer-events: none;
+    }
+    .hero__card .mono { color: var(--violet); display: block; margin-bottom: 14px; font-weight: 700; }
+    .hero__card ol {
+      list-style: none;
+      counter-reset: step;
+      display: grid;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .hero__card ol li { display: flex; gap: 12px; align-items: baseline; border-bottom: 1px dashed rgba(22,22,22,.35); padding-bottom: 8px; }
+    .hero__card ol li:last-child { border-bottom: 0; }
+    .hero__card ol li::before {
+      counter-increment: step;
+      content: "0" counter(step) " _";
+      color: var(--violet);
+    }
+    .hero__card .barcode { color: var(--ink); margin-top: 16px; }
+    .hero__card .stamp {
+      position: absolute;
+      bottom: 16px; right: 16px;
+      width: 62px; height: 62px;
+      border: 2px solid var(--violet);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--violet);
+      transform: rotate(-12deg);
+      text-align: center;
+      line-height: 1.2;
+    }
+    .hero__right { position: relative; }
+    .hero__right .tape { position: absolute; z-index: 4; }
+    .hc-tape-1 { top: -12px; left: 20px; transform: rotate(-6deg); }
+    .hc-tape-2 { bottom: -10px; right: -14px; transform: rotate(4deg); }
+
+    .hero__stats {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(240,236,223,.35);
+      margin-top: 54px;
+    }
+    .hero__stats > div {
+      padding: 22px 18px 40px;
+      border-right: 1px solid rgba(240,236,223,.35);
+    }
+    .hero__stats > div:last-child { border-right: none; }
+    .hero__stats b {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 56px);
+      display: block;
+      line-height: 1;
+      color: var(--lime);
+    }
+    .hero__stats > div:nth-child(2) b { color: var(--pink); }
+    .hero__stats > div:nth-child(3) b { color: var(--violet); -webkit-text-stroke: 1px var(--cream); }
+    .hero__stats span { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-top: 8px; opacity: .7; }
+
+    .d-arrow { top: 148px; right: 40%; width: 70px; color: var(--cream); opacity: .9; transform: rotate(10deg); }
+    .d-bolt { top: 40%; right: 3%; width: 46px; color: var(--lime); }
+    .d-smiley { bottom: 26%; left: 2%; width: 54px; color: var(--pink); }
+    .d-scribble { top: 90px; left: 42%; width: 150px; color: var(--pink); opacity: .8; }
+    .d-globe-hero { bottom: 18%; right: 44%; width: 60px; color: rgba(240,236,223,.5); }
+
+    @media (max-width: 960px) {
+      .hero__deck { grid-template-columns: 1fr; }
+      .hero__right { max-width: 460px; margin-top: 10px; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 124px; }
+      .hero__stats { grid-template-columns: 1fr; }
+      .hero__stats > div { border-right: none; border-bottom: 1px solid rgba(240,236,223,.35); }
+      .hero__stats > div:last-child { border-bottom: none; }
+      .ht-2, .ht-4 { display: none; }
+    }
+
+    /* ═══ marquee ═══ */
+    .marquee {
+      background: var(--lime);
+      color: var(--ink);
+      border-top: 2px solid var(--ink-deep);
+      border-bottom: 2px solid var(--ink-deep);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 13px 0;
+      position: relative;
+      z-index: 4;
+    }
+    .marquee--violet { background: var(--violet); color: var(--cream); }
+    .marquee--cream { background: var(--cream); color: var(--ink); }
+    .marquee__track {
+      display: inline-flex;
+      gap: 42px;
+      align-items: center;
+      animation: marquee 24s linear infinite;
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .marquee__track span { display: inline-flex; gap: 42px; align-items: center; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ═══ ELI5 — cream paper spread, START-ticket energy ═══ */
+    .eli5 {
+      padding: 110px 0 100px;
+      position: relative;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(86,76,248,.14), transparent 40%),
+        var(--cream);
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .eli5__halftone {
+      position: absolute;
+      right: -130px;
+      top: -80px;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background-image: radial-gradient(var(--ink) 1.4px, transparent 1.6px);
+      background-size: 11px 11px;
+      opacity: .14;
+      pointer-events: none;
+    }
+    .eli5__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: start;
+    }
+    .eli5 h2 { font-size: clamp(44px, 5.6vw, 86px); margin-bottom: 28px; }
+    .eli5 h2 em { font-style: normal; color: transparent; -webkit-text-stroke: 2px var(--ink); }
+    .eli5 h2 .blob { /* rounded sticker word like "StarT" letters */
+      font-family: var(--font-black);
+      background: var(--ink);
+      color: var(--lime);
+      padding: .04em .18em .08em;
+      border-radius: .35em;
+      display: inline-block;
+      transform: rotate(-2deg);
+      font-size: .82em;
+    }
+    .eli5__story { font-size: 18px; display: grid; gap: 18px; max-width: 560px; }
+    .eli5__story .big { font-size: 21px; font-weight: 600; }
+    .eli5__story .big mark { background: var(--lime); padding: 0 4px; }
+    .eli5__story p mark { background: var(--pink); padding: 0 4px; }
+
+    /* dashed ticket card, straight from the START poster */
+    .eli5__ticket {
+      background: var(--paper);
+      border: 2px dashed var(--ink);
+      outline: 12px solid var(--paper);
+      outline-offset: -14px;
+      padding: 40px 32px 28px;
+      transform: rotate(-1.5deg);
+      box-shadow: 14px 14px 0 var(--ink);
+      position: relative;
+    }
+    .eli5__ticket::before { /* corner smiley, like the START ticket */
+      content: "";
+      position: absolute;
+      top: 16px; right: 18px;
+      width: 30px; height: 30px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 38%, var(--ink) 2px, transparent 2.6px),
+        radial-gradient(circle at 66% 38%, var(--ink) 2px, transparent 2.6px);
+    }
+    .eli5__ticket::after {
+      content: "";
+      position: absolute;
+      top: 33px; right: 24.5px;
+      width: 17px; height: 8px;
+      border: 2px solid var(--ink);
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+    }
+    .eli5__ticket .tape { position: absolute; top: -14px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+    .eli5__ticket .mono-top { font-family: var(--font-mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; text-align: center; display: block; margin-bottom: 8px; opacity: .7; }
+    .eli5__ticket h3 { font-family: var(--font-black); text-transform: none; font-size: 30px; line-height: 1.1; margin: 0 0 22px; text-align: center; }
+    .eli5__ticket h3 .cap { color: var(--violet); }
+    .eli5__ticket ul { list-style: none; display: grid; gap: 14px; }
+    .eli5__ticket li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      font-size: 15.5px;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(22,22,22,.25);
+      padding-bottom: 12px;
+    }
+    .eli5__ticket li:last-child { border-bottom: none; padding-bottom: 0; }
+    .eli5__ticket li b { font-family: var(--font-mono); color: var(--violet); font-size: 13px; white-space: nowrap; }
+    .eli5__ticket .mono { display: flex; justify-content: space-between; margin-top: 22px; opacity: .7; }
+    .d-bolt-2 { bottom: 60px; left: 46%; width: 40px; color: var(--violet); transform: rotate(14deg); }
+    .d-star-eli5 { top: 70px; right: 8%; width: 56px; color: var(--violet); }
+    @media (max-width: 900px) { .eli5__grid { grid-template-columns: 1fr; } }
+
+    /* ═══ how it works — dark, clean grid (ref 3 discipline) ═══ */
+    .how { padding: 96px 0 110px; background: var(--ink-deep); position: relative; overflow: hidden; }
+    .how__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 52px; flex-wrap: wrap; }
+    .how h2 { font-size: clamp(40px, 5vw, 76px); }
+    .how h2 span { color: var(--lime); }
+    .how__cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .how-card {
+      border: 2px solid var(--cream);
+      padding: 26px 22px 30px;
+      position: relative;
+      background: var(--ink);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .how-card:hover { transform: translate(-3px,-3px); }
+    .how-card:nth-child(1):hover { box-shadow: 6px 6px 0 var(--lime); }
+    .how-card:nth-child(2):hover { box-shadow: 6px 6px 0 var(--pink); }
+    .how-card:nth-child(3):hover { box-shadow: 6px 6px 0 var(--violet); }
+    .how-card:nth-child(4):hover { box-shadow: 6px 6px 0 var(--lime); }
+    .how-card .num { font-family: var(--font-mono); font-size: 13px; color: var(--pink); display: block; margin-bottom: 46px; }
+    .how-card:nth-child(even) .num { color: var(--lime); }
+    .how-card h3 { font-size: 24px; margin-bottom: 14px; }
+    .how-card p { font-size: 14.5px; opacity: .82; }
+    .how-card .icon { position: absolute; top: 20px; right: 18px; width: 34px; height: 34px; }
+    .d-globe-how { bottom: 40px; right: 3%; width: 74px; color: rgba(240,236,223,.35); }
+    @media (max-width: 980px) { .how__cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .how__cards { grid-template-columns: 1fr; } }
+
+    /* ═══ value — violet block, Design Trends poster ═══ */
+    .value { background: var(--violet); color: var(--cream); padding: 100px 0; position: relative; overflow: hidden; }
+    .d-ast-value { top: 46px; right: 6%; width: 64px; color: var(--lime); }
+    .value__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 60px; align-items: center; }
+    .value h2 { font-size: clamp(40px, 5vw, 78px); margin-bottom: 24px; }
+    .value h2 .hl { background: var(--lime); color: var(--ink); padding: 0 .1em; }
+    .value__lead { font-size: 18px; max-width: 480px; margin-bottom: 30px; }
+    .value__list { list-style: none; display: grid; gap: 12px; font-size: 16px; font-weight: 500; }
+    .value__list li { display: flex; gap: 12px; align-items: baseline; }
+    .value__list li::before { content: "▸"; color: var(--lime); font-size: 18px; }
+    .value__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .stat-tile {
+      border: 2px solid var(--cream);
+      background: rgba(14,14,14,.4);
+      padding: 26px 22px;
+      position: relative;
+    }
+    .stat-tile b { font-family: var(--font-display); font-weight: 400; font-size: clamp(42px, 4.4vw, 64px); line-height: 1; display: block; color: var(--lime); }
+    .stat-tile:nth-child(2) b, .stat-tile:nth-child(3) b { color: var(--pink); }
+    .stat-tile p { font-size: 13.5px; margin-top: 12px; opacity: .9; }
+    .stat-tile .mono { position: absolute; top: 10px; right: 12px; opacity: .5; font-size: 10px; }
+    .stat-tile--wide { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: var(--ink); border-color: var(--lime); }
+    .stat-tile--wide p { font-size: 15px; margin: 0; max-width: 420px; }
+    @media (max-width: 900px) { .value__grid { grid-template-columns: 1fr; } }
+
+    /* ═══ proof — Kasparov poster: spiky burst, crowns, scribbles ═══ */
+    .proof { padding: 110px 0; background: var(--cream); color: var(--ink); position: relative; overflow: hidden; }
+    .proof__margin-notes { /* faint handwriting column, like the poster's edge scrawl */
+      position: absolute;
+      top: 60px;
+      right: 18px;
+      font-family: var(--font-hand);
+      font-size: 20px;
+      line-height: 1.7;
+      color: rgba(22,22,22,.35);
+      transform: rotate(2deg);
+      text-align: right;
+      pointer-events: none;
+    }
+    .proof__head { max-width: 780px; margin-bottom: 64px; position: relative; }
+    .proof__burst { /* big spiky explosion behind the headline */
+      position: absolute;
+      top: -90px;
+      left: -60px;
+      width: 560px;
+      color: var(--violet);
+      opacity: .95;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .proof__head h2, .proof__head p { position: relative; z-index: 1; }
+    .proof h2 { font-size: clamp(44px, 5.6vw, 86px); margin-bottom: 20px; }
+    .proof h2 .onburst { color: var(--cream); text-shadow: 3px 3px 0 var(--ink); }
+    .proof h2 .stroke { color: transparent; -webkit-text-stroke: 2px var(--ink); }
+    .proof__head p { font-size: 17.5px; font-weight: 500; max-width: 620px; }
+    .proof__head p mark { background: var(--lime); padding: 0 4px; }
+    .proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; z-index: 1; }
+    .proof-card {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 30px 24px 24px;
+      position: relative;
+      box-shadow: 6px 8px 0 rgba(22,22,22,.25);
+      transition: transform .2s ease;
+    }
+    .proof-card:nth-child(odd) { transform: rotate(-1deg); }
+    .proof-card:nth-child(even) { transform: rotate(1.2deg); }
+    .proof-card:hover { transform: rotate(0) translateY(-6px); }
+    .proof-card .crown { /* scribbled crown, like Kasparov's */
+      position: absolute;
+      top: 12px;
+      left: 22px;
+      width: 44px;
+      color: var(--lime);
+      transform: rotate(-8deg);
+    }
+    .proof-card:nth-child(2) .crown { color: var(--pink); }
+    .proof-card:nth-child(3) .crown { color: var(--violet); }
+    .proof-card:nth-child(5) .crown { color: var(--violet); }
+    .proof-card:nth-child(6) .crown { color: var(--pink); }
+    .proof-card .initials {
+      font-family: var(--font-display);
+      font-size: 54px;
+      line-height: 1;
+      color: var(--ink);
+      background: var(--lime);
+      display: inline-block;
+      padding: 8px 14px;
+      margin: 14px 0 18px;
+      transform: rotate(-2deg);
+      clip-path: polygon(3% 6%, 97% 0%, 100% 94%, 0% 100%);
+    }
+    .proof-card:nth-child(2) .initials { background: var(--pink); }
+    .proof-card:nth-child(3) .initials { background: var(--violet); color: var(--cream); }
+    .proof-card:nth-child(5) .initials { background: var(--violet); color: var(--cream); }
+    .proof-card:nth-child(6) .initials { background: var(--pink); }
+    .proof-card h3 { font-size: 22px; margin-bottom: 4px; }
+    .proof-card .skill {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--lime);
+      display: block;
+      margin-bottom: 14px;
+    }
+    .proof-card p { font-size: 14px; opacity: .85; }
+    .proof-card .tape { position: absolute; top: -13px; right: 14px; font-size: 11px; padding: 5px 14px; }
+    @media (max-width: 960px) { .proof__grid { grid-template-columns: repeat(2, 1fr); } .proof__margin-notes { display: none; } }
+    @media (max-width: 600px) { .proof__grid { grid-template-columns: 1fr; } .proof__burst { width: 120%; left: -10%; } }
+
+    /* ═══ lead form ═══ */
+    .lead {
+      padding: 110px 0 120px;
+      position: relative;
+      background:
+        radial-gradient(ellipse 700px 400px at 100% 100%, rgba(86,76,248,.25), transparent 60%),
+        var(--ink);
+      overflow: hidden;
+    }
+    .d-star-lead { bottom: 60px; left: 4%; width: 84px; color: var(--pink); }
+    .lead__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+    .lead h2 { font-size: clamp(44px, 5.6vw, 86px); margin-bottom: 22px; }
+    .lead h2 .hl { background: var(--pink); color: var(--ink); padding: 0 .1em; }
+    .lead h2 .ghost { color: transparent; -webkit-text-stroke: 2px var(--cream); }
+    .lead__copy p { font-size: 17px; max-width: 460px; margin-bottom: 26px; }
+    .lead__copy p strong { color: var(--lime); }
+    .lead__perks { list-style: none; display: grid; gap: 12px; font-family: var(--font-mono); font-size: 13px; }
+    .lead__perks li { display: flex; gap: 12px; align-items: baseline; }
+    .lead__perks li::before { content: "[✓]"; color: var(--lime); font-weight: 700; }
+    .lead__form-shell { position: relative; }
+    .lead__form-shell .tape { position: absolute; top: -14px; left: 34px; z-index: 2; transform: rotate(-3deg); }
+    .lead__form-shell .tape-b { top: auto; left: auto; bottom: -12px; right: 24px; transform: rotate(3deg); }
+    .lead form {
+      background: var(--paper);
+      color: var(--ink);
+      clip-path: polygon(1% 1.5%, 99.5% 0%, 100% 98.5%, 0.5% 100%);
+      box-shadow: 14px 14px 0 var(--violet);
+      padding: 40px 32px 32px;
+      display: grid;
+      gap: 18px;
+      position: relative;
+    }
+    .lead form .mono { opacity: .6; }
+    .field label {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+    .field input, .field select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 16px;
+      padding: 13px 14px;
+      border: 2px solid var(--ink);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 0;
+      appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23161616' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .field input:focus, .field select:focus { outline: 3px solid var(--violet); outline-offset: 1px; }
+    .field--row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .lead form .btn { justify-content: center; width: 100%; box-shadow: 5px 5px 0 var(--ink); background: var(--violet); color: var(--cream); }
+    .lead form .btn:hover { box-shadow: 8px 8px 0 var(--ink); }
+    .form-note { font-size: 12.5px; opacity: .65; text-align: center; }
+    .form-success {
+      display: none;
+      background: var(--lime);
+      border: 2px solid var(--ink);
+      padding: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .form-success.show { display: block; }
+    @media (max-width: 900px) { .lead__grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .field--row { grid-template-columns: 1fr; } }
+
+    /* ═══ footer ═══ */
+    footer { background: var(--ink-deep); border-top: 2px solid rgba(240,236,223,.2); position: relative; overflow: hidden; }
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 34px 24px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .footer__inner .logo { font-size: 22px; }
+    .footer__inner .mono { opacity: .6; }
+    .footer__inner .barcode { color: var(--cream); opacity: .8; }
+    .footer__big {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 13vw, 220px);
+      text-transform: uppercase;
+      line-height: .85;
+      text-align: center;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(240,236,223,.28);
+      user-select: none;
+      padding: 34px 0 10px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .footer__big em { font-style: normal; color: rgba(193,253,66,.35); -webkit-text-stroke: 0; }
+
+    /* floating CTA */
+    .float-cta {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 90;
+      font-size: 12px;
+      padding: 12px 18px;
+      box-shadow: 4px 4px 0 var(--ink-deep), 0 0 0 2px var(--lime);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .float-cta.show { opacity: 1; pointer-events: auto; transform: none; }
+  </style>
 </head>
 <body>
-  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <div class="loader" id="loader" aria-live="polite">
-    <div class="loader__content glass-card">
-      <div class="loader__hearts" aria-hidden="true">
-        <span>❤</span>
-        <span>❤</span>
-        <span>❤</span>
+  <!-- shared doodle shapes -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="shape-star">
+        <path d="M50 0 L58 38 L100 50 L58 62 L50 100 L42 62 L0 50 L42 38 Z" fill="currentColor"/>
+      </g>
+      <g id="shape-bolt">
+        <path d="M55 0 L18 55 L42 55 L30 100 L78 40 L50 40 Z" fill="currentColor"/>
+      </g>
+      <g id="shape-arrow">
+        <path d="M10 90 C30 40, 60 30, 88 18 M88 18 l-20 -2 M88 18 l-4 19" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      </g>
+      <g id="shape-smiley">
+        <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="35" cy="40" r="5" fill="currentColor"/>
+        <circle cx="65" cy="40" r="5" fill="currentColor"/>
+        <path d="M30 62 C40 74, 60 74, 70 62" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      </g>
+      <g id="shape-scribble">
+        <path d="M5 60 C25 10, 50 70, 70 25 S115 55, 140 12 M15 75 C50 40, 85 80, 145 35" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      <g id="shape-globe">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+        <ellipse cx="50" cy="50" rx="46" ry="18" fill="none" stroke="currentColor" stroke-width="3"/>
+        <ellipse cx="50" cy="50" rx="18" ry="46" fill="none" stroke="currentColor" stroke-width="3"/>
+        <line x1="4" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="3"/>
+      </g>
+      <g id="shape-crown">
+        <path d="M12 75 L20 30 L38 55 L50 15 L62 55 L80 30 L88 75 Z M12 75 L88 75" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+      </g>
+      <g id="shape-burst">
+        <path d="M100 6 L112 62 L152 22 L138 74 L196 60 L152 96 L200 112 L146 118 L178 166 L128 136 L130 196 L100 148 L70 194 L74 136 L22 164 L56 116 L2 110 L52 94 L10 56 L64 72 L48 16 L88 60 Z" fill="currentColor"/>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ═══ NAV ═══ -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="logo" href="#top">ALTIORA<sup>®</sup></a>
+      <nav class="topbar__links">
+        <a href="#what">What is it</a>
+        <a href="#how">How it works</a>
+        <a href="#value">Why it matters</a>
+        <a href="#proof">The proof</a>
+      </nav>
+      <a class="btn" href="#join">Book a simulation ↗</a>
+    </div>
+  </header>
+
+  <!-- ═══ HERO — collage poster ═══ -->
+  <section class="hero" id="top">
+    <svg class="doodle d-arrow" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-arrow"/></svg>
+    <svg class="doodle d-bolt" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-bolt"/></svg>
+    <svg class="doodle d-smiley spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-smiley"/></svg>
+    <svg class="doodle d-scribble" viewBox="0 0 150 90" aria-hidden="true"><use href="#shape-scribble"/></svg>
+    <svg class="doodle d-globe-hero" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-globe"/></svg>
+
+    <div class="wrap">
+      <div class="hero__meta">
+        <span class="mono"><span class="crosshair">✛</span> Altiora, est. 2026 — career simulations</span>
+        <span class="mono">new aesthetics of learning · new rules · new era</span>
+        <span class="mono">update _01/26 <span class="crosshair">✛</span></span>
       </div>
-      <p class="eyebrow">For Mom</p>
-      <h1>Loading memories for mom...</h1>
-      <div class="loader__bar" aria-hidden="true">
-        <span id="loaderBar"></span>
+
+      <div class="hero__stage">
+        <h1 class="reveal">
+          <span class="row"><span class="scratch">Turn soft skills</span></span>
+          <span class="row"><span class="ghost">into your bleeding</span></span>
+          <span class="row ransom" aria-label="edge."><b>E</b><b>D</b><b>G</b><b>E</b><b>.</b></span>
+        </h1>
+        <div class="hero__tapes" aria-hidden="true">
+          <span class="tape ht-1">communication</span>
+          <span class="tape tape--pink ht-2">leadership</span>
+          <span class="tape tape--violet ht-3">negotiation</span>
+          <span class="tape tape--cream ht-4">teamwork</span>
+        </div>
       </div>
-      <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">
-        Soft music: Off
-      </button>
+
+      <div class="hero__deck">
+        <div class="reveal">
+          <p class="hero__sub">
+            Altiora drops school &amp; college students into <strong>career simulations</strong>
+            that mirror real corporate life — boardrooms, deadlines, difficult teammates
+            and all — so the skills no textbook teaches become the advantage no résumé can beat.
+          </p>
+          <div class="hero__ctas">
+            <a class="btn" href="#join">Book your simulation ↗</a>
+            <a class="btn btn--cream" href="#what">Explain it like I'm 5</a>
+          </div>
+          <span class="hero__hand">
+            <svg viewBox="0 0 60 34" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 6 C20 28, 40 30, 56 22 M56 22 l-9 2 M56 22 l-7 -7"/>
+            </svg>
+            this is the real syllabus
+          </span>
+        </div>
+
+        <div class="hero__right reveal">
+          <span class="tape tape--ink hc-tape-1">inside every sim</span>
+          <div class="hero__card">
+            <span class="mono">Altiora / sim.card _v1</span>
+            <ol>
+              <li>communication under pressure</li>
+              <li>leadership &amp; ownership</li>
+              <li>negotiation &amp; persuasion</li>
+              <li>teamwork with real stakes</li>
+              <li>&amp; more</li>
+            </ol>
+            <div class="barcode" aria-hidden="true"></div>
+            <span class="stamp">rated<br />all<br />humans</span>
+          </div>
+          <span class="tape tape--pink hc-tape-2">no. real. consequences.</span>
+        </div>
+      </div>
+
+      <div class="hero__stats reveal">
+        <div><b>85%</b><span>of career success is linked to soft skills*</span></div>
+        <div><b>1000+</b><span>students put through the fire, safely</span></div>
+        <div><b>0</b><span>textbooks. 100% real-world scenarios</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Career simulations ✦ Soft skills ✦ Real-world pressure ✦ Zero real-world consequences ✦ Communicate ✦ Lead ✦ Negotiate ✦ Adapt ✦</span>
+      <span>Career simulations ✦ Soft skills ✦ Real-world pressure ✦ Zero real-world consequences ✦ Communicate ✦ Lead ✦ Negotiate ✦ Adapt ✦</span>
     </div>
   </div>
 
-  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
-  <div class="floating-icons" id="floatingIcons" aria-hidden="true"></div>
-
-  <main id="app">
-    <section class="hero section" id="top">
-      <div class="hero__backdrop"></div>
-      <div class="hero__content">
-        <p class="eyebrow hero-reveal">A little digital scrapbook</p>
-        <h1 class="hero__title hero-reveal">Happy Mother’s Day <span>❤</span></h1>
-        <p class="hero__subtitle hero-reveal">A tiny world made just for you</p>
-        <p class="hero__blurb hero-reveal">
-          Every hug, every smile, every quiet sacrifice became a little bit of magic in my life.
-          This is a playful thank-you wrapped in memories.
-        </p>
-        <div class="hero__actions hero-reveal">
-          <a class="cta-button" href="#journey">Start the Journey</a>
-          <button class="ghost-button" id="secretTrigger" type="button">Press for a hidden smile</button>
-        </div>
-      </div>
-      <div class="hero__orbit" aria-hidden="true">
-        <div class="orbit orbit--one"></div>
-        <div class="orbit orbit--two"></div>
-        <div class="hero__heart">❤</div>
-      </div>
-    </section>
-
-    <section class="section intro-panel reveal" id="journey">
-      <div class="glass-card intro-panel__card">
-        <p class="eyebrow">Memory Journey</p>
-        <h2>Five little levels, one very big thank you</h2>
-        <p>
-          Scroll slowly, tap everything cute, and let each level unlock like a warm little chapter.
-        </p>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-1">
-      <div class="level__header">
-        <p class="eyebrow">Level 1</p>
-        <h2>The Hug Collector</h2>
-        <p>Tap the floating hearts to reveal sweet little truths that always lived in my heart.</p>
-      </div>
-      <div class="hug-collector glass-card">
-        <div class="hug-collector__playground" id="heartPlayground" aria-label="Heart message game"></div>
-        <div class="hug-collector__message" id="heartMessage">
-          Click a heart and it will whisper a memory.
-        </div>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-2">
-      <div class="level__header">
-        <p class="eyebrow">Level 2</p>
-        <h2>Memory Gallery</h2>
-        <p>A soft polaroid scrapbook of beautiful, funny, and home-shaped moments.</p>
-      </div>
-      <div class="gallery-grid" id="galleryGrid">
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Our happy little world" data-image="assets/aa.jpeg" data-caption="One frame, all my comfort in one place.">
-          <img src="assets/aa.jpeg" alt="Family standing together under green trees on a walkway." />
-          <div class="polaroid__caption">
-            <h3>Our happy little world</h3>
-            <p>One frame, all my comfort.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Sunlit elegance" data-image="assets/jhljhnin.jpeg" data-caption="Grace, sunshine, and the kind of presence that makes every place brighter.">
-          <img src="assets/jhljhnin.jpeg" alt="Mom standing on a terrace in a white and blue dress under a bright sky." />
-          <div class="polaroid__caption">
-            <h3>Sunlit elegance</h3>
-            <p>Grace in the softest light.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Playful sunset" data-image="assets/kk.jpeg" data-caption="The kind of moment that feels like friendship and motherhood at the same time.">
-          <img src="assets/kk.jpeg" alt="Mom and child making playful peace sign poses at sunset." />
-          <div class="polaroid__caption">
-            <h3>Playful sunset</h3>
-            <p>Joy always looked easy with you.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Rest mode" data-image="assets/kkkk.jpeg" data-caption="Proof that even rest looks beautiful when you finally let yourself relax.">
-          <img src="assets/kkkk.jpeg" alt="Mom relaxing on a hammock in a green garden." />
-          <div class="polaroid__caption">
-            <h3>Rest mode</h3>
-            <p>Your calm is its own kind of beauty.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Mountain glow" data-image="assets/niju.jpeg" data-caption="Strong, gentle, and quietly glowing exactly like you always do.">
-          <img src="assets/niju.jpeg" alt="Mom sitting outdoors with mountains in the background." />
-          <div class="polaroid__caption">
-            <h3>Mountain glow</h3>
-            <p>Strong and soft, always.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Candlelight hug" data-image="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" data-caption="A hug that says more than a thousand long speeches ever could.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" alt="Mother and child hugging during a candlelit celebration." />
-          <div class="polaroid__caption">
-            <h3>Candlelight hug</h3>
-            <p>Love looked like this.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Family sparkle" data-image="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" data-caption="A full-family smile that feels like a safe place I can return to forever.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" alt="Family selfie smiling together during a celebration." />
-          <div class="polaroid__caption">
-            <h3>Family sparkle</h3>
-            <p>Together is my favorite feeling.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory City in the clouds" data-image="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" data-caption="Poised, proud, and full of that quiet confidence I always admired.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" alt="Mom seated at a glass table with a mountain view behind her." />
-          <div class="polaroid__caption">
-            <h3>City in the clouds</h3>
-            <p>My forever inspiration.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-3">
-      <div class="level__header">
-        <p class="eyebrow">Level 3</p>
-        <h2>Reasons Why I Love You</h2>
-        <p>Flip the cards. Every side tells a truth I hope life reminds you of every day.</p>
-      </div>
-      <div class="reasons-grid" id="reasonsGrid">
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your strength</span>
-            <span class="flip-card__back">You carried more than anyone saw, and still gave softness.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your smile</span>
-            <span class="flip-card__back">It turns ordinary days into safe and golden places.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your sacrifices</span>
-            <span class="flip-card__back">So much of who I am was built from all you quietly gave.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your hugs</span>
-            <span class="flip-card__back">No matter what happens, they still feel like home to me.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your patience</span>
-            <span class="flip-card__back">You loved me through every messy stage with grace.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your belief</span>
-            <span class="flip-card__back">You saw my light before I learned how to see it myself.</span>
-          </span>
-        </button>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-4">
-      <div class="level__header">
-        <p class="eyebrow">Level 4</p>
-        <h2>Catch the Hearts</h2>
-        <p>Move the basket with your mouse or finger and catch the falling hearts.</p>
-      </div>
-      <div class="game glass-card">
-        <div class="game__topbar">
-          <div class="game__score">Score: <span id="scoreValue">0</span></div>
-          <button class="ghost-button" id="startGame" type="button">Start Mini Game</button>
-        </div>
-        <div class="game__arena" id="gameArena" aria-label="Heart catching mini game">
-          <div class="game__basket" id="basket">❤</div>
-          <div class="game__overlay" id="gameOverlay">
-            <p>Catch 12 hearts to unlock the final message.</p>
+  <!-- ═══ ELI5 ═══ -->
+  <section class="eli5" id="what">
+    <div class="eli5__halftone" aria-hidden="true"></div>
+    <svg class="doodle d-star-eli5 spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
+    <svg class="doodle d-bolt-2" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-bolt"/></svg>
+    <div class="wrap">
+      <div class="section-tag">01 — What is a career simulation?</div>
+      <div class="eli5__grid">
+        <div class="reveal">
+          <h2>Okay. You're five.<br /><em>Here's</em> the <span class="blob">deal.</span></h2>
+          <div class="eli5__story">
+            <p class="big">You know how you play <mark>"office-office"</mark> or "shop-shop" with your friends — someone's the boss, someone sells the toys, someone pretends the teddy bear is a customer?</p>
+            <p>A career simulation is exactly that game — except we make it feel <strong>real</strong>. Real projects. Real deadlines. A real "boss" who wants answers. A teammate who disagrees with you. A pitch you have to give even though your tummy has butterflies.</p>
+            <p>And here's the magic part: because it's a game, <mark>you can't actually lose</mark>. If you mess up the pitch, nobody gets fired. You just try again — and this time, you're better.</p>
+            <p>Do that enough times, and when the <em>real</em> real world shows up… it feels like a game you've already played. <strong>That's the edge.</strong></p>
           </div>
         </div>
-        <p class="game__note" id="gameNote">Ready when you are.</p>
-      </div>
-    </section>
 
-    <section class="section finale reveal" id="level-5">
-      <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
-      <div class="level__header">
-        <p class="eyebrow">Level 5</p>
-        <h2>Final Message</h2>
+        <div class="eli5__ticket reveal">
+          <span class="tape tape--ink">get ja head start</span>
+          <span class="mono-top">✂ admit one — sáb 18h30 ✂</span>
+          <h3>Practice life <span class="cap">before</span><br />life happens.</h3>
+          <ul>
+            <li><b>01 _ pretend</b> You step into a real job role — manager, founder, negotiator, team lead.</li>
+            <li><b>02 _ pressure</b> We throw real workplace curveballs at you: conflicts, deadlines, pitches.</li>
+            <li><b>03 _ play</b> You respond, decide, argue, present — like it's all really happening.</li>
+            <li><b>04 _ power-up</b> Mentors show you exactly what worked, what didn't, and how to level up.</li>
+          </ul>
+          <div class="mono"><span>Altiora / sim.v1</span><span>pr. your future self</span></div>
+        </div>
       </div>
-      <div class="finale__card glass-card">
-        <p class="typewriter" id="typewriterText"></p>
-        <p class="finale__wish">Happy Mother’s Day ❤</p>
-        <div class="finale__heart" aria-hidden="true">❤</div>
-        <p class="finale__made">Made with love</p>
-        <button class="cta-button" id="replayButton" type="button">Replay the Journey</button>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <div class="modal" id="photoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal__backdrop" data-close-modal="true"></div>
-    <div class="modal__card glass-card">
-      <button class="modal__close" id="closeModal" type="button" aria-label="Close photo view">×</button>
-      <img id="modalImage" src="" alt="" />
-      <h3 id="modalTitle">Memory</h3>
-      <p id="modalCaption"></p>
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how" id="how">
+    <svg class="doodle d-globe-how" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-globe"/></svg>
+    <div class="wrap">
+      <div class="how__head">
+        <div>
+          <div class="section-tag">02 — How it works</div>
+          <h2>Movement <span>matters.</span><br />Here's yours.</h2>
+        </div>
+        <span class="mono">be in flow. // no rules, just intention</span>
+      </div>
+      <div class="how__cards">
+        <article class="how-card reveal">
+          <span class="num">step _01</span>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#c1fd42" stroke-width="2" aria-hidden="true"><circle cx="17" cy="17" r="15"/><ellipse cx="17" cy="17" rx="15" ry="6"/><line x1="17" y1="2" x2="17" y2="32"/></svg>
+          <h3>Get your role</h3>
+          <p>You're not a student today. You're the product lead. The founder. The negotiator. Badge on, story begins.</p>
+        </article>
+        <article class="how-card reveal">
+          <span class="num">step _02</span>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#f982fb" stroke-width="2.5" aria-hidden="true"><path d="M17 3 L21 13 L31 13 L23 20 L26 31 L17 24 L8 31 L11 20 L3 13 L13 13 Z"/></svg>
+          <h3>Face the chaos</h3>
+          <p>A client changes the brief. A teammate pushes back. The deadline moves up. Exactly like the real thing — because it's built from the real thing.</p>
+        </article>
+        <article class="how-card reveal">
+          <span class="num">step _03</span>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#564cf8" stroke-width="2.5" aria-hidden="true"><path d="M4 30 C10 8, 24 8, 30 30" /><path d="M11 30 C14 18, 20 18, 23 30"/></svg>
+          <h3>Get coached</h3>
+          <p>Mentors from the corporate world replay your moves with you. What landed, what flopped, what to do differently — no grades, just growth.</p>
+        </article>
+        <article class="how-card reveal">
+          <span class="num">step _04</span>
+          <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#c1fd42" stroke-width="2.5" aria-hidden="true"><path d="M6 28 L28 6 M28 6 h-12 M28 6 v12"/></svg>
+          <h3>Walk out sharper</h3>
+          <p>You leave with proof of skills, a mentor's scorecard, and the quiet confidence of someone who has already been there.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee marquee--violet" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Express, don't impress ✦ Practice before pressure ✦ Fail safe, learn fast ✦ Your edge is human ✦</span>
+      <span>Express, don't impress ✦ Practice before pressure ✦ Fail safe, learn fast ✦ Your edge is human ✦</span>
     </div>
   </div>
 
-  <div class="secret-toast" id="secretToast" role="status" aria-live="polite">
-    Secret unlocked: If moms were a superpower, you’d be the whole universe.
+  <!-- ═══ VALUE ═══ -->
+  <section class="value" id="value">
+    <svg class="doodle d-ast-value spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
+    <div class="wrap">
+      <div class="value__grid">
+        <div class="reveal">
+          <div class="section-tag">03 — Why it matters</div>
+          <h2>Grades open doors.<br /><span class="hl">Soft skills</span> keep them open.</h2>
+          <p class="value__lead">
+            AI can write the code and crunch the numbers. What it can't do is read a room,
+            win trust, calm a conflict, or rally a team. In every career field, the people
+            who rise are the ones machines can't imitate.
+          </p>
+          <ul class="value__list">
+            <li>Interview with stories, not just certificates</li>
+            <li>Lead group projects instead of hiding in them</li>
+            <li>Negotiate internships, salaries &amp; opportunities</li>
+            <li>Stay calm and useful when plans fall apart</li>
+            <li>Build a network before you need one</li>
+          </ul>
+        </div>
+        <div class="value__stats reveal">
+          <div class="stat-tile">
+            <span class="mono">SRI/Carnegie*</span>
+            <b>85%</b>
+            <p>of long-term job success comes from people skills — only 15% from technical knowledge, per research popularised by Stanford Research Institute &amp; Carnegie Mellon Foundation.</p>
+          </div>
+          <div class="stat-tile">
+            <span class="mono">LinkedIn</span>
+            <b>92%</b>
+            <p>of talent professionals say soft skills matter as much or more than hard skills when they hire.</p>
+          </div>
+          <div class="stat-tile">
+            <span class="mono">LinkedIn</span>
+            <b>89%</b>
+            <p>of bad hires fail because of missing soft skills — not missing technical ability.</p>
+          </div>
+          <div class="stat-tile">
+            <span class="mono">Deloitte</span>
+            <b>2/3</b>
+            <p>of all jobs will be soft-skill intensive by 2030. The curve is bending toward the human.</p>
+          </div>
+          <div class="stat-tile stat-tile--wide">
+            <p><strong>Translation:</strong> the earlier you start practising, the longer your compounding head start. That's the value Altiora hands you.</p>
+            <a class="btn" href="#join">Claim the head start ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROOF — spiky burst + crowns ═══ -->
+  <section class="proof" id="proof">
+    <div class="proof__margin-notes" aria-hidden="true">
+      beat the ordinary ✎<br />rating: 2851<br />#softskillsclub<br />world champions<br />of being human
+    </div>
+    <div class="wrap">
+      <div class="section-tag">04 — The proof</div>
+      <div class="proof__head reveal">
+        <svg class="proof__burst" viewBox="0 0 200 200" aria-hidden="true"><use href="#shape-burst"/></svg>
+        <h2><span class="onburst">The greats</span> didn't win<br />on talent <span class="stroke">alone.</span></h2>
+        <p>Every one of these names had rivals with equal talent. What separated them was a <mark>soft skill sharpened into a weapon</mark>. Yours is waiting.</p>
+      </div>
+      <div class="proof__grid">
+        <article class="proof-card reveal">
+          <span class="tape">storytelling</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">SJ</span>
+          <h3>Steve Jobs</h3>
+          <span class="skill">edge: storytelling &amp; presentation</span>
+          <p>Jobs wasn't Apple's best engineer — he was its best storyteller. His keynote craft turned product launches into cultural events and made the world feel technology before understanding it.</p>
+        </article>
+        <article class="proof-card reveal">
+          <span class="tape tape--pink">empathy</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">SN</span>
+          <h3>Satya Nadella</h3>
+          <span class="skill">edge: empathy as strategy</span>
+          <p>He took over a Microsoft famous for infighting and rebuilt it on one word: empathy. Listening replaced politics — and the company's value grew nearly tenfold under his watch.</p>
+        </article>
+        <article class="proof-card reveal">
+          <span class="tape tape--violet">communication</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">OW</span>
+          <h3>Oprah Winfrey</h3>
+          <span class="skill">edge: connection &amp; communication</span>
+          <p>From a difficult childhood to a media empire — not through capital or connections, but through an unmatched ability to make anyone feel heard. Communication was the business model.</p>
+        </article>
+        <article class="proof-card reveal">
+          <span class="tape">leadership</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">IN</span>
+          <h3>Indra Nooyi</h3>
+          <span class="skill">edge: people-first leadership</span>
+          <p>As PepsiCo's CEO she wrote personal letters to the parents of her executives, thanking them. That human touch built loyalty no salary could buy — and a 12-year run at the top.</p>
+        </article>
+        <article class="proof-card reveal">
+          <span class="tape tape--pink">composure</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">MSD</span>
+          <h3>MS Dhoni</h3>
+          <span class="skill">edge: calm under pressure</span>
+          <p>"Captain Cool" won World Cups with the same heartbeat in the last over as the first. Composure under chaos is a trainable skill — and it made him one of history's great finishers.</p>
+        </article>
+        <article class="proof-card reveal">
+          <span class="tape tape--violet">people skills</span>
+          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
+          <span class="initials">RB</span>
+          <h3>Richard Branson</h3>
+          <span class="skill">edge: charisma &amp; delegation</span>
+          <p>Dyslexic and out of school at 16, Branson built 400+ companies on pure people skills — hiring brilliantly, trusting deeply, and making every customer feel like a friend.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee marquee--cream" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Your turn ✦ Limited seats per cohort ✦ Book the simulation ✦ Your turn ✦ Limited seats per cohort ✦ Book the simulation ✦</span>
+      <span>Your turn ✦ Limited seats per cohort ✦ Book the simulation ✦ Your turn ✦ Limited seats per cohort ✦ Book the simulation ✦</span>
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="script.js"></script>
+  <!-- ═══ LEAD FORM ═══ -->
+  <section class="lead" id="join">
+    <svg class="doodle d-star-lead spin" viewBox="0 0 100 100" aria-hidden="true"><use href="#shape-star"/></svg>
+    <div class="wrap">
+      <div class="lead__grid">
+        <div class="lead__copy reveal">
+          <div class="section-tag">05 — Join the next cohort</div>
+          <h2>Don't just <span class="ghost">read</span><br />about the <span class="hl">edge.</span></h2>
+          <p>
+            Tell us who you are and we'll send you the free <strong>Altiora Soft Skills
+            Playbook</strong> plus first access to the next career simulation cohort.
+            Seats are deliberately small — mentors coach humans, not crowds.
+          </p>
+          <ul class="lead__perks">
+            <li>Free soft-skills playbook, instantly</li>
+            <li>Priority invite to the next simulation</li>
+            <li>Personal skill-gap snapshot after your first sim</li>
+            <li>Zero spam. Only signal.</li>
+          </ul>
+        </div>
+
+        <div class="lead__form-shell reveal">
+          <span class="tape tape--pink">limited seats</span>
+          <span class="tape tape--ink tape-b">future. proof. yourself.</span>
+          <!--
+            Lead capture: point the action at your endpoint (Formspree, Getform,
+            Google Apps Script, or your own backend) and remove the JS demo handler.
+            e.g. action="https://formspree.io/f/YOUR_ID" method="POST"
+          -->
+          <form id="leadForm" novalidate>
+            <span class="mono">Altiora / lead.capture _v1</span>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div class="field--row">
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@email.com" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone / WhatsApp</label>
+                <input id="phone" name="phone" type="tel" placeholder="+91 ..." />
+              </div>
+            </div>
+            <div class="field--row">
+              <div class="field">
+                <label for="role">I am a…</label>
+                <select id="role" name="role" required>
+                  <option value="" selected disabled>Choose one</option>
+                  <option>School student</option>
+                  <option>College student</option>
+                  <option>Parent</option>
+                  <option>Educator / Institution</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="goal">I want to sharpen…</label>
+                <select id="goal" name="goal">
+                  <option selected>Not sure yet — show me</option>
+                  <option>Communication</option>
+                  <option>Leadership</option>
+                  <option>Negotiation</option>
+                  <option>Teamwork</option>
+                  <option>Confidence under pressure</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn" type="submit">Send me the playbook ↗</button>
+            <div class="form-success" id="formSuccess" role="status">
+              ✦ You're in. Check your inbox — your playbook and cohort invite are on the way.
+            </div>
+            <p class="form-note">By signing up you agree to hear from Altiora. Unsubscribe anytime.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer__big" aria-hidden="true">ALTI<em>O</em>RA</div>
+    <div class="footer__inner">
+      <a class="logo" href="#top">ALTIORA<sup>®</sup></a>
+      <span class="mono">Turn soft skills into your bleeding edge — © 2026</span>
+      <span class="mono">hello@altiora.in</span>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </footer>
+
+  <a class="btn float-cta" id="floatCta" href="#join">Book a simulation ↗</a>
+
+  <script>
+    // scroll reveals
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // floating CTA appears after the hero, hides near the form
+    const floatCta = document.getElementById('floatCta');
+    const joinSection = document.getElementById('join');
+    window.addEventListener('scroll', () => {
+      const pastHero = window.scrollY > window.innerHeight * 0.9;
+      const nearForm = joinSection.getBoundingClientRect().top < window.innerHeight;
+      floatCta.classList.toggle('show', pastHero && !nearForm);
+    }, { passive: true });
+
+    // demo form handler — replace with your real endpoint (see comment above the form)
+    document.getElementById('leadForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      document.getElementById('formSuccess').classList.add('show');
+      form.querySelector('button[type="submit"]').textContent = 'Submitted ✦';
+      form.querySelectorAll('input, select, button').forEach((el) => el.disabled = true);
+    });
+  </script>
 </body>
 </html>
