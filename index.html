@@ -134,6 +134,36 @@
 
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: none; }
+    /* staggered children reveal */
+    .stagger > * { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .stagger.in > * { opacity: 1; transform: none; }
+    .stagger.in > *:nth-child(2) { transition-delay: .1s; }
+    .stagger.in > *:nth-child(3) { transition-delay: .2s; }
+    .stagger.in > *:nth-child(4) { transition-delay: .3s; }
+
+    /* kinetic headline: rows rise in on load */
+    .kin { display: block; overflow: hidden; }
+    .kin > * { display: inline-block; transform: translateY(110%); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+    .kin:nth-of-type(2) > * { animation-delay: .12s; }
+    .kin:nth-of-type(3) > * { animation-delay: .24s; }
+    @keyframes rise { to { transform: translateY(0); } }
+
+    /* scroll progress bar */
+    .progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--lime);
+      z-index: 200;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .stagger > * { opacity: 1; transform: none; transition: none; }
+      .kin > * { transform: none; animation: none; }
+      .marquee__track, .spin, .grain { animation: none; }
+      .doodle { transform: none !important; }
+    }
 
     /* floating doodles */
     .doodle { position: absolute; pointer-events: none; }
@@ -385,7 +415,8 @@
     }
     .hero__stats > div:nth-child(2) b { color: var(--pink); }
     .hero__stats > div:nth-child(3) b { color: var(--violet); -webkit-text-stroke: 1px var(--cream); }
-    .hero__stats span { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-top: 8px; opacity: .7; }
+    .hero__stats > div > span { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; display: block; margin-top: 8px; opacity: .7; }
+    .hero__stats b .count { font: inherit; color: inherit; }
 
     .d-arrow { top: 148px; right: 40%; width: 70px; color: var(--cream); opacity: .9; transform: rotate(10deg); }
     .d-bolt { top: 40%; right: 3%; width: 46px; color: var(--lime); }
@@ -612,7 +643,7 @@
     .proof h2 .stroke { color: transparent; -webkit-text-stroke: 2px var(--ink); }
     .proof__head p { font-size: 17.5px; font-weight: 500; max-width: 620px; }
     .proof__head p mark { background: var(--lime); padding: 0 4px; }
-    .proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; z-index: 1; }
+    .proof__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; position: relative; z-index: 1; }
     .proof-card {
       background: var(--ink);
       color: var(--cream);
@@ -634,8 +665,7 @@
     }
     .proof-card:nth-child(2) .crown { color: var(--pink); }
     .proof-card:nth-child(3) .crown { color: var(--violet); }
-    .proof-card:nth-child(5) .crown { color: var(--violet); }
-    .proof-card:nth-child(6) .crown { color: var(--pink); }
+    .proof-card:nth-child(4) .crown { color: var(--pink); }
     .proof-card .initials {
       font-family: var(--font-display);
       font-size: 54px;
@@ -650,8 +680,7 @@
     }
     .proof-card:nth-child(2) .initials { background: var(--pink); }
     .proof-card:nth-child(3) .initials { background: var(--violet); color: var(--cream); }
-    .proof-card:nth-child(5) .initials { background: var(--violet); color: var(--cream); }
-    .proof-card:nth-child(6) .initials { background: var(--pink); }
+    .proof-card:nth-child(4) .initials { background: var(--pink); }
     .proof-card h3 { font-size: 22px; margin-bottom: 4px; }
     .proof-card .skill {
       font-family: var(--font-mono);
@@ -664,7 +693,8 @@
     }
     .proof-card p { font-size: 14px; opacity: .85; }
     .proof-card .tape { position: absolute; top: -13px; right: 14px; font-size: 11px; padding: 5px 14px; }
-    @media (max-width: 960px) { .proof__grid { grid-template-columns: repeat(2, 1fr); } .proof__margin-notes { display: none; } }
+    @media (max-width: 1060px) { .proof__grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 960px) { .proof__margin-notes { display: none; } }
     @media (max-width: 600px) { .proof__grid { grid-template-columns: 1fr; } .proof__burst { width: 120%; left: -10%; } }
 
     /* ═══ lead form ═══ */
@@ -792,6 +822,7 @@
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progressBar" aria-hidden="true"></div>
 
   <!-- shared doodle shapes -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -859,10 +890,10 @@
       </div>
 
       <div class="hero__stage">
-        <h1 class="reveal">
-          <span class="row"><span class="scratch">Turn soft skills</span></span>
-          <span class="row"><span class="ghost">into your bleeding</span></span>
-          <span class="row ransom" aria-label="edge."><b>E</b><b>D</b><b>G</b><b>E</b><b>.</b></span>
+        <h1>
+          <span class="row kin"><span class="scratch">Turn soft skills</span></span>
+          <span class="row kin"><span class="ghost">into your bleeding</span></span>
+          <span class="row kin"><span class="ransom" aria-label="edge."><b>E</b><b>D</b><b>G</b><b>E</b><b>.</b></span></span>
         </h1>
         <div class="hero__tapes" aria-hidden="true">
           <span class="tape ht-1">communication</span>
@@ -875,9 +906,9 @@
       <div class="hero__deck">
         <div class="reveal">
           <p class="hero__sub">
-            Altiora drops school &amp; college students into <strong>career simulations</strong>
-            that mirror real corporate life — boardrooms, deadlines, difficult teammates
-            and all — so the skills no textbook teaches become the advantage no résumé can beat.
+            We drop students into <strong>career simulations</strong> of real corporate life —
+            boardrooms, deadlines, difficult teammates — so the skills no textbook
+            teaches become the advantage no résumé can beat.
           </p>
           <div class="hero__ctas">
             <a class="btn" href="#join">Book your simulation ↗</a>
@@ -909,9 +940,9 @@
         </div>
       </div>
 
-      <div class="hero__stats reveal">
-        <div><b>85%</b><span>of career success is linked to soft skills*</span></div>
-        <div><b>1000+</b><span>students put through the fire, safely</span></div>
+      <div class="hero__stats stagger">
+        <div><b><span class="count" data-target="85">0</span>%</b><span>of career success is linked to soft skills*</span></div>
+        <div><b><span class="count" data-target="1000">0</span>+</b><span>students put through the fire, safely</span></div>
         <div><b>0</b><span>textbooks. 100% real-world scenarios</span></div>
       </div>
     </div>
@@ -936,10 +967,9 @@
         <div class="reveal">
           <h2>Okay. You're five.<br /><em>Here's</em> the <span class="blob">deal.</span></h2>
           <div class="eli5__story">
-            <p class="big">You know how you play <mark>"office-office"</mark> or "shop-shop" with your friends — someone's the boss, someone sells the toys, someone pretends the teddy bear is a customer?</p>
-            <p>A career simulation is exactly that game — except we make it feel <strong>real</strong>. Real projects. Real deadlines. A real "boss" who wants answers. A teammate who disagrees with you. A pitch you have to give even though your tummy has butterflies.</p>
-            <p>And here's the magic part: because it's a game, <mark>you can't actually lose</mark>. If you mess up the pitch, nobody gets fired. You just try again — and this time, you're better.</p>
-            <p>Do that enough times, and when the <em>real</em> real world shows up… it feels like a game you've already played. <strong>That's the edge.</strong></p>
+            <p class="big">You know how you play <mark>"office-office"</mark> with your friends — someone's the boss, someone sells the toys?</p>
+            <p>A career simulation is that game, made to feel <strong>real</strong>. Real projects, real deadlines, a real "boss", a teammate who disagrees with you. But because it's a game, <mark>you can't actually lose</mark> — mess up the pitch, nobody gets fired. You just try again, better.</p>
+            <p>Do that enough times, and when the real world shows up… it feels like a game you've already played. <strong>That's the edge.</strong></p>
           </div>
         </div>
 
@@ -970,41 +1000,34 @@
         </div>
         <span class="mono">be in flow. // no rules, just intention</span>
       </div>
-      <div class="how__cards">
-        <article class="how-card reveal">
+      <div class="how__cards stagger">
+        <article class="how-card">
           <span class="num">step _01</span>
           <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#c1fd42" stroke-width="2" aria-hidden="true"><circle cx="17" cy="17" r="15"/><ellipse cx="17" cy="17" rx="15" ry="6"/><line x1="17" y1="2" x2="17" y2="32"/></svg>
           <h3>Get your role</h3>
           <p>You're not a student today. You're the product lead. The founder. The negotiator. Badge on, story begins.</p>
         </article>
-        <article class="how-card reveal">
+        <article class="how-card">
           <span class="num">step _02</span>
           <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#f982fb" stroke-width="2.5" aria-hidden="true"><path d="M17 3 L21 13 L31 13 L23 20 L26 31 L17 24 L8 31 L11 20 L3 13 L13 13 Z"/></svg>
           <h3>Face the chaos</h3>
-          <p>A client changes the brief. A teammate pushes back. The deadline moves up. Exactly like the real thing — because it's built from the real thing.</p>
+          <p>A client changes the brief. A teammate pushes back. The deadline moves up. Built from the real thing.</p>
         </article>
-        <article class="how-card reveal">
+        <article class="how-card">
           <span class="num">step _03</span>
           <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#564cf8" stroke-width="2.5" aria-hidden="true"><path d="M4 30 C10 8, 24 8, 30 30" /><path d="M11 30 C14 18, 20 18, 23 30"/></svg>
           <h3>Get coached</h3>
-          <p>Mentors from the corporate world replay your moves with you. What landed, what flopped, what to do differently — no grades, just growth.</p>
+          <p>Corporate mentors replay your moves with you. What landed, what flopped — no grades, just growth.</p>
         </article>
-        <article class="how-card reveal">
+        <article class="how-card">
           <span class="num">step _04</span>
           <svg class="icon" viewBox="0 0 34 34" fill="none" stroke="#c1fd42" stroke-width="2.5" aria-hidden="true"><path d="M6 28 L28 6 M28 6 h-12 M28 6 v12"/></svg>
           <h3>Walk out sharper</h3>
-          <p>You leave with proof of skills, a mentor's scorecard, and the quiet confidence of someone who has already been there.</p>
+          <p>You leave with a mentor's scorecard and the quiet confidence of someone who has already been there.</p>
         </article>
       </div>
     </div>
   </section>
-
-  <div class="marquee marquee--violet" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Express, don't impress ✦ Practice before pressure ✦ Fail safe, learn fast ✦ Your edge is human ✦</span>
-      <span>Express, don't impress ✦ Practice before pressure ✦ Fail safe, learn fast ✦ Your edge is human ✦</span>
-    </div>
-  </div>
 
   <!-- ═══ VALUE ═══ -->
   <section class="value" id="value">
@@ -1015,41 +1038,29 @@
           <div class="section-tag">03 — Why it matters</div>
           <h2>Grades open doors.<br /><span class="hl">Soft skills</span> keep them open.</h2>
           <p class="value__lead">
-            AI can write the code and crunch the numbers. What it can't do is read a room,
-            win trust, calm a conflict, or rally a team. In every career field, the people
-            who rise are the ones machines can't imitate.
+            AI can write the code and crunch the numbers. It can't read a room,
+            win trust, or rally a team. In every field, the people who rise are
+            the ones machines can't imitate.
           </p>
           <ul class="value__list">
             <li>Interview with stories, not just certificates</li>
-            <li>Lead group projects instead of hiding in them</li>
             <li>Negotiate internships, salaries &amp; opportunities</li>
             <li>Stay calm and useful when plans fall apart</li>
-            <li>Build a network before you need one</li>
           </ul>
         </div>
-        <div class="value__stats reveal">
+        <div class="value__stats stagger">
           <div class="stat-tile">
             <span class="mono">SRI/Carnegie*</span>
-            <b>85%</b>
-            <p>of long-term job success comes from people skills — only 15% from technical knowledge, per research popularised by Stanford Research Institute &amp; Carnegie Mellon Foundation.</p>
+            <b><span class="count" data-target="85">0</span>%</b>
+            <p>of long-term job success comes from people skills — only 15% from technical knowledge.</p>
           </div>
           <div class="stat-tile">
             <span class="mono">LinkedIn</span>
-            <b>92%</b>
-            <p>of talent professionals say soft skills matter as much or more than hard skills when they hire.</p>
-          </div>
-          <div class="stat-tile">
-            <span class="mono">LinkedIn</span>
-            <b>89%</b>
-            <p>of bad hires fail because of missing soft skills — not missing technical ability.</p>
-          </div>
-          <div class="stat-tile">
-            <span class="mono">Deloitte</span>
-            <b>2/3</b>
-            <p>of all jobs will be soft-skill intensive by 2030. The curve is bending toward the human.</p>
+            <b><span class="count" data-target="92">0</span>%</b>
+            <p>of recruiters say soft skills matter as much or more than hard skills when they hire.</p>
           </div>
           <div class="stat-tile stat-tile--wide">
-            <p><strong>Translation:</strong> the earlier you start practising, the longer your compounding head start. That's the value Altiora hands you.</p>
+            <p><strong>Translation:</strong> the earlier you start practising, the longer your compounding head start.</p>
             <a class="btn" href="#join">Claim the head start ↗</a>
           </div>
         </div>
@@ -1069,54 +1080,38 @@
         <h2><span class="onburst">The greats</span> didn't win<br />on talent <span class="stroke">alone.</span></h2>
         <p>Every one of these names had rivals with equal talent. What separated them was a <mark>soft skill sharpened into a weapon</mark>. Yours is waiting.</p>
       </div>
-      <div class="proof__grid">
-        <article class="proof-card reveal">
+      <div class="proof__grid stagger">
+        <article class="proof-card">
           <span class="tape">storytelling</span>
           <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
           <span class="initials">SJ</span>
           <h3>Steve Jobs</h3>
-          <span class="skill">edge: storytelling &amp; presentation</span>
-          <p>Jobs wasn't Apple's best engineer — he was its best storyteller. His keynote craft turned product launches into cultural events and made the world feel technology before understanding it.</p>
+          <span class="skill">edge: storytelling</span>
+          <p>Not Apple's best engineer — its best storyteller. His keynote craft turned product launches into cultural events.</p>
         </article>
-        <article class="proof-card reveal">
+        <article class="proof-card">
           <span class="tape tape--pink">empathy</span>
           <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
           <span class="initials">SN</span>
           <h3>Satya Nadella</h3>
           <span class="skill">edge: empathy as strategy</span>
-          <p>He took over a Microsoft famous for infighting and rebuilt it on one word: empathy. Listening replaced politics — and the company's value grew nearly tenfold under his watch.</p>
+          <p>Rebuilt a Microsoft famous for infighting on one word: empathy. Its value grew nearly tenfold under his watch.</p>
         </article>
-        <article class="proof-card reveal">
+        <article class="proof-card">
           <span class="tape tape--violet">communication</span>
           <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
           <span class="initials">OW</span>
           <h3>Oprah Winfrey</h3>
-          <span class="skill">edge: connection &amp; communication</span>
-          <p>From a difficult childhood to a media empire — not through capital or connections, but through an unmatched ability to make anyone feel heard. Communication was the business model.</p>
+          <span class="skill">edge: connection</span>
+          <p>Built a media empire on an unmatched ability to make anyone feel heard. Communication was the business model.</p>
         </article>
-        <article class="proof-card reveal">
-          <span class="tape">leadership</span>
-          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
-          <span class="initials">IN</span>
-          <h3>Indra Nooyi</h3>
-          <span class="skill">edge: people-first leadership</span>
-          <p>As PepsiCo's CEO she wrote personal letters to the parents of her executives, thanking them. That human touch built loyalty no salary could buy — and a 12-year run at the top.</p>
-        </article>
-        <article class="proof-card reveal">
+        <article class="proof-card">
           <span class="tape tape--pink">composure</span>
           <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
           <span class="initials">MSD</span>
           <h3>MS Dhoni</h3>
           <span class="skill">edge: calm under pressure</span>
-          <p>"Captain Cool" won World Cups with the same heartbeat in the last over as the first. Composure under chaos is a trainable skill — and it made him one of history's great finishers.</p>
-        </article>
-        <article class="proof-card reveal">
-          <span class="tape tape--violet">people skills</span>
-          <svg class="crown" viewBox="0 0 100 90" aria-hidden="true"><use href="#shape-crown"/></svg>
-          <span class="initials">RB</span>
-          <h3>Richard Branson</h3>
-          <span class="skill">edge: charisma &amp; delegation</span>
-          <p>Dyslexic and out of school at 16, Branson built 400+ companies on pure people skills — hiring brilliantly, trusting deeply, and making every customer feel like a friend.</p>
+          <p>"Captain Cool" won World Cups with the same heartbeat in the last over as the first. Composure is trainable.</p>
         </article>
       </div>
     </div>
@@ -1138,9 +1133,9 @@
           <div class="section-tag">05 — Join the next cohort</div>
           <h2>Don't just <span class="ghost">read</span><br />about the <span class="hl">edge.</span></h2>
           <p>
-            Tell us who you are and we'll send you the free <strong>Altiora Soft Skills
-            Playbook</strong> plus first access to the next career simulation cohort.
-            Seats are deliberately small — mentors coach humans, not crowds.
+            Tell us who you are and get the free <strong>Altiora Soft Skills Playbook</strong>
+            plus first access to the next cohort. Seats are deliberately small —
+            mentors coach humans, not crowds.
           </p>
           <ul class="lead__perks">
             <li>Free soft-skills playbook, instantly</li>
@@ -1222,7 +1217,7 @@
     <div class="footer__inner">
       <a class="logo" href="#top">ALTIORA<sup>®</sup></a>
       <span class="mono">Turn soft skills into your bleeding edge — © 2026</span>
-      <span class="mono">hello@altiora.in</span>
+      <span class="mono">connect.altiora@gmail.com</span>
       <div class="barcode" aria-hidden="true"></div>
     </div>
   </footer>
@@ -1230,13 +1225,56 @@
   <a class="btn float-cta" id="floatCta" href="#join">Book a simulation ↗</a>
 
   <script>
-    // scroll reveals
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // scroll reveals (single elements + staggered groups)
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    document.querySelectorAll('.reveal, .stagger').forEach((el) => io.observe(el));
+
+    // count-up stats when they scroll into view
+    const countIo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        countIo.unobserve(entry.target);
+        const el = entry.target;
+        const target = +el.dataset.target;
+        if (reducedMotion) { el.textContent = target; return; }
+        const start = performance.now();
+        const dur = 1200;
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.count').forEach((el) => countIo.observe(el));
+
+    // scroll progress bar + gentle parallax drift on doodles
+    const progressBar = document.getElementById('progressBar');
+    const doodles = [...document.querySelectorAll('.doodle')];
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progressBar.style.width = (window.scrollY / max * 100) + '%';
+      if (!reducedMotion) {
+        doodles.forEach((d, i) => {
+          const rect = d.parentElement.getBoundingClientRect();
+          const shift = (rect.top - innerHeight / 2) * (0.04 + (i % 3) * 0.02);
+          d.style.translate = '0 ' + shift.toFixed(1) + 'px';
+        });
+      }
+    }, { passive: true });
+
+    // marquees pause on hover
+    document.querySelectorAll('.marquee').forEach((m) => {
+      m.addEventListener('mouseenter', () => { m.querySelector('.marquee__track').style.animationPlayState = 'paused'; });
+      m.addEventListener('mouseleave', () => { m.querySelector('.marquee__track').style.animationPlayState = 'running'; });
+    });
 
     // floating CTA appears after the hero, hides near the form
     const floatCta = document.getElementById('floatCta');
