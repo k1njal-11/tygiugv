@@ -1,258 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Mother's Day</title>
-  <meta
-    name="description"
-    content="A playful and heartfelt Mother's Day digital gift made with love."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;500;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Altiora — Turn Soft Skills Into Your Bleeding Edge</title>
+<meta name="description" content="Altiora runs career simulations that mirror real corporate life, so school and college students build the soft skills that decide who gets ahead — before their first job ever starts." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;1,500&family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --lime:#C6FF3D;
+    --lime-deep:#A8E80F;
+    --ink:#141414;
+    --ink-soft:#1D1D1D;
+    --paper:#EFEBE2;
+    --paper-dark:#E4DFD3;
+    --white:#FCFBF7;
+    --muted:#5c5c54;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  ::selection{background:var(--ink);color:var(--lime);}
+
+  /* grain overlay */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;z-index:999;
+    opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,h2,h3,.display{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;}
+  .scribble{font-family:'Caveat',cursive;text-transform:none;letter-spacing:0;}
+
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  section{position:relative;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.72rem;
+    text-transform:uppercase;letter-spacing:.22em;
+    background:var(--ink);color:var(--lime);
+    padding:8px 16px;border-radius:4px;
+    transform:rotate(-1.2deg);
+    margin-bottom:22px;
+  }
+  .eyebrow--light{background:var(--lime);color:var(--ink);}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem;
+    text-transform:uppercase;letter-spacing:.06em;
+    padding:16px 30px;border-radius:999px;
+    border:2px solid var(--ink);cursor:pointer;
+    text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  }
+  .btn--lime{background:var(--lime);color:var(--ink);box-shadow:5px 5px 0 var(--ink);}
+  .btn--lime:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink);}
+  .btn--dark{background:var(--ink);color:var(--lime);box-shadow:5px 5px 0 rgba(20,20,20,.25);}
+  .btn--dark:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(20,20,20,.35);}
+  .btn--ghost{background:transparent;color:var(--ink);}
+  .btn--ghost:hover{background:var(--ink);color:var(--lime);}
+  .btn .arrow{font-family:'Space Grotesk',sans-serif;font-weight:700;transition:transform .18s ease;}
+  .btn:hover .arrow{transform:translateX(4px);}
+
+  /* ============ NAV ============ */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(239,235,226,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1280px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Archivo Black',sans-serif;font-size:1.5rem;letter-spacing:.02em;
+    text-decoration:none;display:flex;align-items:center;gap:10px;
+  }
+  .logo__mark{
+    width:34px;height:34px;background:var(--ink);color:var(--lime);
+    display:grid;place-items:center;border-radius:8px;
+    font-size:1.1rem;transform:rotate(-6deg);
+  }
+  .nav__links{display:flex;gap:28px;list-style:none;align-items:center;}
+  .nav__links a{
+    font-family:'Archivo',sans-serif;font-weight:600;font-size:.85rem;
+    text-transform:uppercase;letter-spacing:.08em;text-decoration:none;
+    padding-bottom:2px;border-bottom:2px solid transparent;transition:border-color .15s;
+  }
+  .nav__links a:hover{border-color:var(--ink);}
+  .nav .btn{padding:11px 22px;font-size:.78rem;}
+  @media(max-width:820px){.nav__links{display:none;}}
+
+  /* ============ HERO ============ */
+  .hero{
+    background:var(--ink);color:var(--paper);
+    overflow:hidden;
+  }
+  .hero__inner{
+    max-width:1180px;margin:0 auto;padding:90px 24px 70px;
+    position:relative;
+  }
+  .hero__tag{
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.75rem;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--lime);
+    display:flex;align-items:center;gap:12px;margin-bottom:34px;
+  }
+  .hero__tag::before{content:"";width:44px;height:2px;background:var(--lime);}
+  .hero h1{
+    font-size:clamp(2.7rem,8.2vw,7rem);
+    color:var(--white);
+    max-width:14ch;
+  }
+  .hero h1 .hl{
+    color:var(--lime);position:relative;display:inline-block;
+  }
+  .hero h1 .hl svg{
+    position:absolute;left:-2%;bottom:-14px;width:104%;height:22px;
+  }
+  .hero__sub{
+    margin-top:34px;max-width:56ch;font-size:1.12rem;color:#c9c6bc;
+  }
+  .hero__sub strong{color:var(--lime);font-weight:700;}
+  .hero__actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px;}
+  .hero .btn--lime{border-color:var(--lime);box-shadow:5px 5px 0 var(--lime-deep);}
+  .hero .btn--ghost{color:var(--paper);border-color:var(--paper);}
+  .hero .btn--ghost:hover{background:var(--paper);color:var(--ink);}
+  .hero__stats{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:2px;margin-top:70px;background:#3a3a35;border:2px solid #3a3a35;border-radius:14px;overflow:hidden;
+  }
+  .hero__stat{background:var(--ink-soft);padding:24px 22px;}
+  .hero__stat b{
+    display:block;font-family:'Archivo Black',sans-serif;
+    font-size:clamp(1.6rem,3.4vw,2.4rem);color:var(--lime);margin-bottom:6px;
+  }
+  .hero__stat span{font-size:.85rem;color:#b7b4aa;}
+  @media(max-width:680px){.hero__stats{grid-template-columns:1fr;}}
+  .hero__squiggle{
+    position:absolute;right:-60px;top:40px;width:340px;opacity:.85;pointer-events:none;
+  }
+  @media(max-width:900px){.hero__squiggle{display:none;}}
+  .hero__sticker{
+    position:absolute;right:60px;bottom:120px;
+    background:var(--lime);color:var(--ink);
+    font-family:'Caveat',cursive;font-weight:700;font-size:1.35rem;
+    padding:14px 22px;border-radius:6px;transform:rotate(6deg);
+    box-shadow:6px 6px 0 rgba(0,0,0,.4);
+  }
+  @media(max-width:1080px){.hero__sticker{display:none;}}
+
+  /* marquee */
+  .marquee{
+    background:var(--lime);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+    overflow:hidden;white-space:nowrap;padding:14px 0;
+  }
+  .marquee--dark{background:var(--ink);border-color:var(--ink);}
+  .marquee__track{display:inline-block;animation:scroll 28s linear infinite;}
+  .marquee span{
+    font-family:'Archivo Black',sans-serif;font-size:1.05rem;text-transform:uppercase;
+    letter-spacing:.06em;margin:0 26px;color:var(--ink);
+  }
+  .marquee--dark span{color:var(--lime);}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ============ SECTION SHELL ============ */
+  .section{padding:96px 0;}
+  .section__head{max-width:760px;margin-bottom:56px;}
+  .section__head h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:18px;}
+  .section__head p{font-size:1.08rem;color:var(--muted);}
+
+  /* ============ ELI5 ============ */
+  .eli5{background:var(--paper);}
+  .eli5__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start;}
+  @media(max-width:900px){.eli5__grid{grid-template-columns:1fr;}}
+  .eli5__story{
+    background:var(--white);border:2px solid var(--ink);border-radius:var(--radius);
+    padding:38px 34px;box-shadow:8px 8px 0 var(--ink);position:relative;
+  }
+  .eli5__story::before{
+    content:"";position:absolute;top:-14px;left:34px;width:110px;height:28px;
+    background:rgba(198,255,61,.75);transform:rotate(-3deg);
+    border:1px solid rgba(20,20,20,.15);
+  }
+  .eli5__story h3{font-size:1.3rem;margin-bottom:18px;}
+  .eli5__story p{margin-bottom:16px;font-size:1.05rem;}
+  .eli5__story p:last-child{margin-bottom:0;}
+  .eli5__story .big{
+    font-family:'Caveat',cursive;font-size:1.7rem;font-weight:700;line-height:1.25;
+    background:var(--lime);display:inline;padding:2px 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  }
+  .steps{display:grid;gap:18px;}
+  .step{
+    display:flex;gap:20px;align-items:flex-start;
+    background:var(--white);border:2px solid var(--ink);border-radius:14px;
+    padding:22px 24px;transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .step:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
+  .step__num{
+    flex:0 0 auto;width:46px;height:46px;border-radius:50%;
+    background:var(--ink);color:var(--lime);
+    font-family:'Archivo Black',sans-serif;font-size:1.15rem;
+    display:grid;place-items:center;transform:rotate(-4deg);
+  }
+  .step h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;}
+  .step p{font-size:.95rem;color:var(--muted);}
+
+  /* ============ WHY / STAKES ============ */
+  .stakes{background:var(--ink);color:var(--paper);}
+  .stakes .section__head h2{color:var(--white);}
+  .stakes .section__head h2 em{font-style:normal;color:var(--lime);}
+  .stakes .section__head p{color:#b7b4aa;}
+  .stakes__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.stakes__grid{grid-template-columns:1fr;}}
+  .stake{
+    background:var(--ink-soft);border:2px solid #3a3a35;border-radius:var(--radius);
+    padding:30px 26px;transition:border-color .2s ease,transform .2s ease;
+  }
+  .stake:hover{border-color:var(--lime);transform:translateY(-4px);}
+  .stake__icon{
+    width:52px;height:52px;border-radius:12px;background:var(--lime);
+    display:grid;place-items:center;font-size:1.5rem;margin-bottom:20px;transform:rotate(-5deg);
+  }
+  .stake h3{font-size:1.15rem;color:var(--white);margin-bottom:12px;}
+  .stake p{font-size:.95rem;color:#b7b4aa;}
+  .stake p b{color:var(--lime);}
+  .stakes__foot{
+    margin-top:44px;font-family:'Caveat',cursive;font-size:1.5rem;color:var(--lime);
+    text-align:center;
+  }
+
+  /* ============ PROOF / ICONS ============ */
+  .proof{background:var(--paper-dark);}
+  .proof__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:960px){.proof__grid{grid-template-columns:1fr;max-width:560px;}}
+  .card-proof{
+    background:var(--white);border:2px solid var(--ink);border-radius:var(--radius);
+    padding:30px 28px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;gap:14px;
+    transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .card-proof:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink);}
+  .card-proof__skill{
+    align-self:flex-start;background:var(--lime);border:1.5px solid var(--ink);
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.14em;padding:6px 12px;border-radius:4px;
+    transform:rotate(-2deg);
+  }
+  .card-proof h3{font-size:1.35rem;}
+  .card-proof .role{font-size:.82rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:-6px;}
+  .card-proof p{font-size:.95rem;color:#44443d;flex:1;}
+  .card-proof blockquote{
+    font-family:'Caveat',cursive;font-size:1.28rem;font-weight:600;line-height:1.3;
+    border-left:4px solid var(--lime);padding-left:14px;color:var(--ink);
+  }
+
+  /* ============ VALUE ============ */
+  .value{background:var(--paper);}
+  .value__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  @media(max-width:820px){.value__grid{grid-template-columns:1fr;}}
+  .value-card{
+    border:2px solid var(--ink);border-radius:var(--radius);
+    padding:32px 30px;background:var(--white);
+    transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .value-card:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink);}
+  .value-card--lime{background:var(--lime);}
+  .value-card--dark{background:var(--ink);color:var(--paper);}
+  .value-card--dark h3{color:var(--lime);}
+  .value-card--dark li{color:#c9c6bc;}
+  .value-card h3{font-size:1.25rem;margin-bottom:8px;}
+  .value-card .who{
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.2em;margin-bottom:16px;opacity:.7;
+  }
+  .value-card ul{list-style:none;display:grid;gap:12px;margin-top:18px;}
+  .value-card li{display:flex;gap:12px;font-size:.98rem;align-items:flex-start;}
+  .value-card li::before{
+    content:"→";font-weight:700;flex:0 0 auto;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .value-card--dark li::before{color:var(--lime);}
+
+  /* ============ HOW ============ */
+  .how{background:var(--ink);color:var(--paper);}
+  .how .section__head h2{color:var(--white);}
+  .how .section__head h2 em{font-style:normal;color:var(--lime);}
+  .how .section__head p{color:#b7b4aa;}
+  .how__row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:phase;
+  }
+  @media(max-width:960px){.how__row{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.how__row{grid-template-columns:1fr;}}
+  .phase{
+    background:var(--ink-soft);border:2px solid #3a3a35;border-radius:var(--radius);
+    padding:26px 22px;position:relative;counter-increment:phase;
+    transition:border-color .2s ease,transform .2s ease;
+  }
+  .phase:hover{border-color:var(--lime);transform:translateY(-4px);}
+  .phase::before{
+    content:"0" counter(phase);
+    font-family:'Archivo Black',sans-serif;font-size:2.4rem;color:var(--lime);
+    display:block;margin-bottom:14px;
+  }
+  .phase h3{font-size:1rem;color:var(--white);margin-bottom:10px;letter-spacing:.02em;}
+  .phase p{font-size:.88rem;color:#b7b4aa;}
+
+  /* ============ LEAD FORM ============ */
+  .lead{background:var(--lime);}
+  .lead__grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.lead__grid{grid-template-columns:1fr;gap:40px;}}
+  .lead h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:20px;}
+  .lead p{font-size:1.08rem;max-width:46ch;color:#2c2c25;}
+  .lead .perks{margin-top:26px;display:grid;gap:12px;list-style:none;}
+  .lead .perks li{display:flex;gap:10px;font-weight:500;align-items:flex-start;}
+  .lead .perks li::before{content:"★";flex:0 0 auto;}
+  .form-card{
+    background:var(--white);border:2px solid var(--ink);border-radius:var(--radius);
+    padding:36px 32px;box-shadow:10px 10px 0 var(--ink);
+  }
+  .form-card h3{font-size:1.15rem;margin-bottom:22px;}
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:.72rem;
+    text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px;
+  }
+  .field input,.field select{
+    width:100%;padding:13px 15px;font-family:'Space Grotesk',sans-serif;font-size:1rem;
+    border:2px solid var(--ink);border-radius:10px;background:var(--paper);
+    outline:none;transition:box-shadow .15s ease;
+  }
+  .field input:focus,.field select:focus{box-shadow:4px 4px 0 var(--lime);border-color:var(--ink);}
+  .form-card .btn{width:100%;justify-content:center;margin-top:6px;}
+  .form-note{font-size:.8rem;color:var(--muted);margin-top:14px;text-align:center;}
+  .form-success{
+    display:none;text-align:center;padding:30px 10px;
+  }
+  .form-success .tick{
+    width:64px;height:64px;margin:0 auto 18px;border-radius:50%;
+    background:var(--lime);border:2px solid var(--ink);
+    display:grid;place-items:center;font-size:1.8rem;
+  }
+  .form-success h3{margin-bottom:10px;}
+  .form-success p{font-size:.95rem;color:var(--muted);max-width:34ch;margin:0 auto;}
+
+  /* ============ FAQ ============ */
+  .faq{background:var(--paper);}
+  .faq__list{max-width:820px;display:grid;gap:14px;}
+  details{
+    background:var(--white);border:2px solid var(--ink);border-radius:14px;
+    overflow:hidden;
+  }
+  summary{
+    cursor:pointer;list-style:none;padding:20px 24px;
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"+";font-family:'Archivo Black',sans-serif;font-size:1.3rem;
+    flex:0 0 auto;transition:transform .2s ease;
+  }
+  details[open] summary::after{transform:rotate(45deg);}
+  details[open] summary{background:var(--lime);}
+  details .answer{padding:18px 24px 24px;font-size:.98rem;color:#44443d;border-top:2px solid var(--ink);}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink);color:#b7b4aa;padding:60px 0 30px;}
+  .footer__grid{
+    display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+    padding-bottom:40px;border-bottom:1px solid #3a3a35;margin-bottom:26px;
+  }
+  .footer__brand .logo{color:var(--white);font-size:1.3rem;}
+  .footer__brand p{margin-top:14px;max-width:34ch;font-size:.9rem;}
+  .footer__tag{font-family:'Caveat',cursive;color:var(--lime);font-size:1.4rem;margin-top:10px;}
+  .footer__col h4{
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:.75rem;color:var(--white);
+    text-transform:uppercase;letter-spacing:.2em;margin-bottom:16px;
+  }
+  .footer__col a{display:block;text-decoration:none;font-size:.92rem;margin-bottom:10px;}
+  .footer__col a:hover{color:var(--lime);}
+  .footer__base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .marquee__track{animation:none;}
+  }
+</style>
 </head>
 <body>
-  <div class="cursor-glow" aria-hidden="true"></div>
 
-  <div class="loader" id="loader" aria-live="polite">
-    <div class="loader__content glass-card">
-      <div class="loader__hearts" aria-hidden="true">
-        <span>❤</span>
-        <span>❤</span>
-        <span>❤</span>
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="logo" href="#top"><span class="logo__mark">▲</span>ALTIORA</a>
+    <ul class="nav__links">
+      <li><a href="#what">What We Do</a></li>
+      <li><a href="#why">Why Soft Skills</a></li>
+      <li><a href="#proof">The Proof</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn--lime" href="#join">Get Early Access <span class="arrow">→</span></a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__tag">Altiora · Career Simulations for Students</p>
+      <h1>
+        Turn soft skills into your
+        <span class="hl">bleeding&nbsp;edge<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 16 C60 6, 120 22, 180 12 S 280 8, 296 14" fill="none" stroke="#C6FF3D" stroke-width="5" stroke-linecap="round"/></svg></span>
+      </h1>
+      <p class="hero__sub">
+        Your degree gets you to the interview. <strong>How you communicate, lead, negotiate and adapt</strong> decides everything after.
+        Altiora drops school and college students into simulations of real corporate life — so they build the skills the classroom never grades, before their career ever begins.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--lime" href="#join">Book a Free Simulation <span class="arrow">→</span></a>
+        <a class="btn btn--ghost" href="#what">What's a career simulation?</a>
       </div>
-      <p class="eyebrow">For Mom</p>
-      <h1>Loading memories for mom...</h1>
-      <div class="loader__bar" aria-hidden="true">
-        <span id="loaderBar"></span>
+      <div class="hero__stats">
+        <div class="hero__stat"><b>85%</b><span>of long-term career success is driven by people skills, not technical knowledge — Harvard, Carnegie &amp; Stanford research</span></div>
+        <div class="hero__stat"><b>9/10</b><span>recruiters say they reject technically qualified candidates over weak communication and teamwork</span></div>
+        <div class="hero__stat"><b>0 hrs</b><span>of most school timetables are spent practising the skills interviews actually test. We exist to fix that.</span></div>
       </div>
-      <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">
-        Soft music: Off
-      </button>
+      <div class="hero__sticker">practice the job<br/>before the job ✦</div>
+      <svg class="hero__squiggle" viewBox="0 0 300 300" fill="none" aria-hidden="true">
+        <path d="M20 250 C 80 40, 160 300, 200 120 S 290 60, 280 30" stroke="#C6FF3D" stroke-width="26" stroke-linecap="round" opacity="0.9"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Communication</span><span>✦</span><span>Leadership</span><span>✦</span><span>Negotiation</span><span>✦</span><span>Teamwork</span><span>✦</span><span>Critical Thinking</span><span>✦</span><span>Adaptability</span><span>✦</span>
+      <span>Communication</span><span>✦</span><span>Leadership</span><span>✦</span><span>Negotiation</span><span>✦</span><span>Teamwork</span><span>✦</span><span>Critical Thinking</span><span>✦</span><span>Adaptability</span><span>✦</span>
     </div>
   </div>
 
-  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
-  <div class="floating-icons" id="floatingIcons" aria-hidden="true"></div>
-
-  <main id="app">
-    <section class="hero section" id="top">
-      <div class="hero__backdrop"></div>
-      <div class="hero__content">
-        <p class="eyebrow hero-reveal">A little digital scrapbook</p>
-        <h1 class="hero__title hero-reveal">Happy Mother’s Day <span>❤</span></h1>
-        <p class="hero__subtitle hero-reveal">A tiny world made just for you</p>
-        <p class="hero__blurb hero-reveal">
-          Every hug, every smile, every quiet sacrifice became a little bit of magic in my life.
-          This is a playful thank-you wrapped in memories.
-        </p>
-        <div class="hero__actions hero-reveal">
-          <a class="cta-button" href="#journey">Start the Journey</a>
-          <button class="ghost-button" id="secretTrigger" type="button">Press for a hidden smile</button>
+  <!-- ELI5 -->
+  <section class="section eli5" id="what">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow">Explained like you're five</span>
+        <h2>So… what is a career simulation?</h2>
+      </div>
+      <div class="eli5__grid">
+        <div class="eli5__story reveal">
+          <h3>Imagine a playground that looks exactly like an office.</h3>
+          <p>You know how pilots don't learn to fly by taking off with 200 passengers on day one? They practise in a <b>flight simulator</b> — a pretend cockpit where mistakes are free and lessons are real.</p>
+          <p>A career simulation is exactly that, but for your career. We build a <b>pretend company</b>. You get a real role, real teammates, a real boss, real deadlines and real curveballs — an angry client, a stubborn negotiation, a presentation to the "board."</p>
+          <p><span class="big">You play the job like a game. The skills you win are 100% real — and they're yours forever.</span></p>
+          <p>When the real interview and the real job arrive, you're not nervous. You've already been there.</p>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step__num">1</div>
+            <div><h4>You get a role</h4><p>Analyst, team lead, product manager, negotiator — a real seat in our simulated company, matched to your level.</p></div>
+          </div>
+          <div class="step reveal">
+            <div class="step__num">2</div>
+            <div><h4>Real-world chaos begins</h4><p>Deadlines shift. A client pushes back. Your team disagrees. Exactly like the corporate world — because it's modelled on it.</p></div>
+          </div>
+          <div class="step reveal">
+            <div class="step__num">3</div>
+            <div><h4>You respond, we coach</h4><p>Mentors watch how you communicate, lead and decide — then give you specific, personal feedback most people don't get until year five of a job.</p></div>
+          </div>
+          <div class="step reveal">
+            <div class="step__num">4</div>
+            <div><h4>You walk out sharper</h4><p>With a skills scorecard, stories for every interview, and confidence that isn't faked — it's rehearsed.</p></div>
+          </div>
         </div>
       </div>
-      <div class="hero__orbit" aria-hidden="true">
-        <div class="orbit orbit--one"></div>
-        <div class="orbit orbit--two"></div>
-        <div class="hero__heart">❤</div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section intro-panel reveal" id="journey">
-      <div class="glass-card intro-panel__card">
-        <p class="eyebrow">Memory Journey</p>
-        <h2>Five little levels, one very big thank you</h2>
-        <p>
-          Scroll slowly, tap everything cute, and let each level unlock like a warm little chapter.
-        </p>
+  <!-- WHY -->
+  <section class="section stakes" id="why">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow eyebrow--light">Why this matters</span>
+        <h2>Everyone has marks. <em>Almost no one has an edge.</em></h2>
+        <p>In every classroom and every applicant pool, thousands of people hold the same degree and the same grades. Soft skills are the tiebreaker — in engineering, medicine, law, design, business, everywhere.</p>
       </div>
-    </section>
-
-    <section class="section level reveal" id="level-1">
-      <div class="level__header">
-        <p class="eyebrow">Level 1</p>
-        <h2>The Hug Collector</h2>
-        <p>Tap the floating hearts to reveal sweet little truths that always lived in my heart.</p>
-      </div>
-      <div class="hug-collector glass-card">
-        <div class="hug-collector__playground" id="heartPlayground" aria-label="Heart message game"></div>
-        <div class="hug-collector__message" id="heartMessage">
-          Click a heart and it will whisper a memory.
+      <div class="stakes__grid">
+        <div class="stake reveal">
+          <div class="stake__icon">🗣️</div>
+          <h3>Interviews test people, not papers</h3>
+          <p>An interview is a <b>conversation</b>, not an exam. The candidate who explains ideas clearly and handles pressure calmly beats the one with a slightly better GPA — almost every time.</p>
+        </div>
+        <div class="stake reveal">
+          <div class="stake__icon">📈</div>
+          <h3>Promotions run on soft skills</h3>
+          <p>Technical skill gets you hired. <b>Leading people, resolving conflict and communicating up</b> is what gets you promoted. The earlier you start practising, the further ahead you stay.</p>
+        </div>
+        <div class="stake reveal">
+          <div class="stake__icon">🤖</div>
+          <h3>AI can't replace them</h3>
+          <p>As AI automates technical tasks, the human skills — <b>empathy, persuasion, judgement, collaboration</b> — become the most defensible advantage a career can have.</p>
         </div>
       </div>
-    </section>
+      <p class="stakes__foot">Hard skills get copied. Soft skills compound. ↗</p>
+    </div>
+  </section>
 
-    <section class="section level reveal" id="level-2">
-      <div class="level__header">
-        <p class="eyebrow">Level 2</p>
-        <h2>Memory Gallery</h2>
-        <p>A soft polaroid scrapbook of beautiful, funny, and home-shaped moments.</p>
-      </div>
-      <div class="gallery-grid" id="galleryGrid">
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Our happy little world" data-image="assets/aa.jpeg" data-caption="One frame, all my comfort in one place.">
-          <img src="assets/aa.jpeg" alt="Family standing together under green trees on a walkway." />
-          <div class="polaroid__caption">
-            <h3>Our happy little world</h3>
-            <p>One frame, all my comfort.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Sunlit elegance" data-image="assets/jhljhnin.jpeg" data-caption="Grace, sunshine, and the kind of presence that makes every place brighter.">
-          <img src="assets/jhljhnin.jpeg" alt="Mom standing on a terrace in a white and blue dress under a bright sky." />
-          <div class="polaroid__caption">
-            <h3>Sunlit elegance</h3>
-            <p>Grace in the softest light.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Playful sunset" data-image="assets/kk.jpeg" data-caption="The kind of moment that feels like friendship and motherhood at the same time.">
-          <img src="assets/kk.jpeg" alt="Mom and child making playful peace sign poses at sunset." />
-          <div class="polaroid__caption">
-            <h3>Playful sunset</h3>
-            <p>Joy always looked easy with you.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Rest mode" data-image="assets/kkkk.jpeg" data-caption="Proof that even rest looks beautiful when you finally let yourself relax.">
-          <img src="assets/kkkk.jpeg" alt="Mom relaxing on a hammock in a green garden." />
-          <div class="polaroid__caption">
-            <h3>Rest mode</h3>
-            <p>Your calm is its own kind of beauty.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Mountain glow" data-image="assets/niju.jpeg" data-caption="Strong, gentle, and quietly glowing exactly like you always do.">
-          <img src="assets/niju.jpeg" alt="Mom sitting outdoors with mountains in the background." />
-          <div class="polaroid__caption">
-            <h3>Mountain glow</h3>
-            <p>Strong and soft, always.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Candlelight hug" data-image="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" data-caption="A hug that says more than a thousand long speeches ever could.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 9.57.55 PM.jpeg" alt="Mother and child hugging during a candlelit celebration." />
-          <div class="polaroid__caption">
-            <h3>Candlelight hug</h3>
-            <p>Love looked like this.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory Family sparkle" data-image="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" data-caption="A full-family smile that feels like a safe place I can return to forever.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 10.02.33 PM.jpeg" alt="Family selfie smiling together during a celebration." />
-          <div class="polaroid__caption">
-            <h3>Family sparkle</h3>
-            <p>Together is my favorite feeling.</p>
-          </div>
-        </article>
-        <article class="polaroid reveal-card" tabindex="0" role="button" aria-label="Open memory City in the clouds" data-image="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" data-caption="Poised, proud, and full of that quiet confidence I always admired.">
-          <img src="assets/WhatsApp Image 2026-05-09 at 10.03.01 PM.jpeg" alt="Mom seated at a glass table with a mountain view behind her." />
-          <div class="polaroid__caption">
-            <h3>City in the clouds</h3>
-            <p>My forever inspiration.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-3">
-      <div class="level__header">
-        <p class="eyebrow">Level 3</p>
-        <h2>Reasons Why I Love You</h2>
-        <p>Flip the cards. Every side tells a truth I hope life reminds you of every day.</p>
-      </div>
-      <div class="reasons-grid" id="reasonsGrid">
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your strength</span>
-            <span class="flip-card__back">You carried more than anyone saw, and still gave softness.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your smile</span>
-            <span class="flip-card__back">It turns ordinary days into safe and golden places.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your sacrifices</span>
-            <span class="flip-card__back">So much of who I am was built from all you quietly gave.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your hugs</span>
-            <span class="flip-card__back">No matter what happens, they still feel like home to me.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your patience</span>
-            <span class="flip-card__back">You loved me through every messy stage with grace.</span>
-          </span>
-        </button>
-        <button class="flip-card" type="button">
-          <span class="flip-card__inner">
-            <span class="flip-card__front">Your belief</span>
-            <span class="flip-card__back">You saw my light before I learned how to see it myself.</span>
-          </span>
-        </button>
-      </div>
-    </section>
-
-    <section class="section level reveal" id="level-4">
-      <div class="level__header">
-        <p class="eyebrow">Level 4</p>
-        <h2>Catch the Hearts</h2>
-        <p>Move the basket with your mouse or finger and catch the falling hearts.</p>
-      </div>
-      <div class="game glass-card">
-        <div class="game__topbar">
-          <div class="game__score">Score: <span id="scoreValue">0</span></div>
-          <button class="ghost-button" id="startGame" type="button">Start Mini Game</button>
-        </div>
-        <div class="game__arena" id="gameArena" aria-label="Heart catching mini game">
-          <div class="game__basket" id="basket">❤</div>
-          <div class="game__overlay" id="gameOverlay">
-            <p>Catch 12 hearts to unlock the final message.</p>
-          </div>
-        </div>
-        <p class="game__note" id="gameNote">Ready when you are.</p>
-      </div>
-    </section>
-
-    <section class="section finale reveal" id="level-5">
-      <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
-      <div class="level__header">
-        <p class="eyebrow">Level 5</p>
-        <h2>Final Message</h2>
-      </div>
-      <div class="finale__card glass-card">
-        <p class="typewriter" id="typewriterText"></p>
-        <p class="finale__wish">Happy Mother’s Day ❤</p>
-        <div class="finale__heart" aria-hidden="true">❤</div>
-        <p class="finale__made">Made with love</p>
-        <button class="cta-button" id="replayButton" type="button">Replay the Journey</button>
-      </div>
-    </section>
-  </main>
-
-  <div class="modal" id="photoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal__backdrop" data-close-modal="true"></div>
-    <div class="modal__card glass-card">
-      <button class="modal__close" id="closeModal" type="button" aria-label="Close photo view">×</button>
-      <img id="modalImage" src="" alt="" />
-      <h3 id="modalTitle">Memory</h3>
-      <p id="modalCaption"></p>
+  <div class="marquee marquee--dark" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Practice the job before the job</span><span>⚡</span><span>Fail safely · Learn fast</span><span>⚡</span><span>Confidence is rehearsed</span><span>⚡</span>
+      <span>Practice the job before the job</span><span>⚡</span><span>Fail safely · Learn fast</span><span>⚡</span><span>Confidence is rehearsed</span><span>⚡</span>
     </div>
   </div>
 
-  <div class="secret-toast" id="secretToast" role="status" aria-live="polite">
-    Secret unlocked: If moms were a superpower, you’d be the whole universe.
-  </div>
+  <!-- PROOF -->
+  <section class="section proof" id="proof">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow">The proof</span>
+        <h2>The greats didn't win on talent alone</h2>
+        <p>Look closely at almost any famous career and you'll find a soft skill doing the heavy lifting.</p>
+      </div>
+      <div class="proof__grid">
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Empathy</span>
+          <h3>Satya Nadella</h3>
+          <p class="role">CEO, Microsoft</p>
+          <p>Nadella inherited a company famous for internal turf wars. His signature move wasn't a product — it was replacing "know-it-all" culture with "learn-it-all" culture built on empathy and listening. Microsoft's value grew nearly tenfold under that shift.</p>
+          <blockquote>"Empathy makes you a better innovator."</blockquote>
+        </article>
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Storytelling</span>
+          <h3>Steve Jobs</h3>
+          <p class="role">Co-founder, Apple</p>
+          <p>Plenty of engineers built phones. Jobs made the world <em>want</em> them — by rehearsing presentations for weeks and turning product launches into stories people retold. His technical co-founders built the machine; his communication built the brand.</p>
+          <blockquote>"The most powerful person in the world is the storyteller."</blockquote>
+        </article>
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Active Listening</span>
+          <h3>Oprah Winfrey</h3>
+          <p class="role">Media entrepreneur</p>
+          <p>Thousands of people could read a teleprompter. Oprah built a billion-dollar empire on something rarer: making every guest — and every viewer — feel genuinely heard. Listening, not broadcasting, was the moat.</p>
+          <blockquote>"Everyone just wants to know: did you hear me?"</blockquote>
+        </article>
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Communicating Up</span>
+          <h3>Indra Nooyi</h3>
+          <p class="role">Former CEO, PepsiCo</p>
+          <p>Nooyi credits her rise from immigrant student to Fortune 50 CEO to relentless clarity — famously writing personal letters to the parents of her executives, and reframing hard boardroom debates so every side felt respected.</p>
+          <blockquote>"Whatever anybody says, think about it — don't assume bad intent."</blockquote>
+        </article>
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Networking &amp; Delegation</span>
+          <h3>Richard Branson</h3>
+          <p class="role">Founder, Virgin Group</p>
+          <p>Dyslexic and out of school at 16, Branson built 400+ companies on the skills school never graded him on: charisma, relationship-building, and hiring people smarter than himself and letting them shine.</p>
+          <blockquote>"Communication is the most important skill any leader can possess."</blockquote>
+        </article>
+        <article class="card-proof reveal">
+          <span class="card-proof__skill">Composure</span>
+          <h3>M.S. Dhoni</h3>
+          <p class="role">World-Cup-winning captain</p>
+          <p>India had batsmen with better averages. Dhoni's edge was "Captain Cool" — decision-making under absurd pressure and backing young players publicly. It's why business schools now teach his leadership as a case study.</p>
+          <blockquote>Pressure is a privilege — if you've practised for it.</blockquote>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="script.js"></script>
+  <!-- VALUE -->
+  <section class="section value" id="value">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow">What you walk away with</span>
+        <h2>Value you can actually point to</h2>
+        <p>Not a participation certificate. A visible, provable upgrade — for students, and for the institutions that back them.</p>
+      </div>
+      <div class="value__grid">
+        <div class="value-card value-card--lime reveal">
+          <p class="who">For students</p>
+          <h3>Your unfair advantage, earned early</h3>
+          <ul>
+            <li>A personal <b>Soft-Skills Scorecard</b> — see exactly where you're strong and what to sharpen next.</li>
+            <li><b>Real stories for interviews</b>: "I led a team through a client crisis" beats "I'm a team player" every time.</li>
+            <li>Confidence built by <b>rehearsal, not pep talks</b> — you've already sat in the meeting, made the pitch, handled the conflict.</li>
+            <li>A certificate + experience portfolio that makes your CV read like a professional's, not a fresher's.</li>
+          </ul>
+        </div>
+        <div class="value-card value-card--dark reveal">
+          <p class="who">For schools &amp; colleges</p>
+          <h3>Outcomes your placement cell can measure</h3>
+          <ul>
+            <li>Plug-and-play simulation programs that run on campus — <b>zero extra load on faculty</b>.</li>
+            <li>Cohort-level analytics: track communication, leadership and collaboration growth across a batch.</li>
+            <li>Students who <b>perform visibly better in placements</b> and group discussions — and say so.</li>
+            <li>A differentiator for admissions: real corporate readiness, not just another certificate course.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section how" id="how">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow eyebrow--light">The Altiora method</span>
+        <h2>One simulation. <em>Four phases.</em></h2>
+        <p>Every Altiora program follows the same loop the best corporate training uses — compressed, gamified, and built for students.</p>
+      </div>
+      <div class="how__row">
+        <div class="phase reveal"><h3>Brief &amp; Role-Up</h3><p>You join a simulated company, meet your team, and receive your role, mission and constraints — just like a first day at work.</p></div>
+        <div class="phase reveal"><h3>Live Simulation</h3><p>Days of real scenarios: standups, client calls, negotiations, pivots and pressure. Every choice you make changes what happens next.</p></div>
+        <div class="phase reveal"><h3>Feedback Mirror</h3><p>Mentors replay your key moments with you. You see yourself the way a manager would — most students say this hour changes everything.</p></div>
+        <div class="phase reveal"><h3>Level-Up Plan</h3><p>You leave with a scorecard, a personal growth plan, and interview-ready stories drawn from what you actually did.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD -->
+  <section class="section lead" id="join">
+    <div class="wrap">
+      <div class="lead__grid">
+        <div class="reveal">
+          <span class="eyebrow">Limited seats per cohort</span>
+          <h2>Get in before your competition does</h2>
+          <p>Book a free demo simulation for yourself, your child, or your institution. Experience one corporate scenario, get one real piece of feedback — and decide from there.</p>
+          <ul class="perks">
+            <li>Free 45-minute taster simulation</li>
+            <li>Personal soft-skills mini-report</li>
+            <li>Program &amp; pricing details for students and campuses</li>
+            <li>No spam. One follow-up, that's it.</li>
+          </ul>
+        </div>
+        <div class="form-card reveal">
+          <form id="leadForm" novalidate>
+            <h3>Reserve your free simulation ↓</h3>
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Priya Sharma" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="field">
+              <label for="who">I am a…</label>
+              <select id="who" name="who" required>
+                <option value="" disabled selected>Select one</option>
+                <option>School student</option>
+                <option>College student</option>
+                <option>Parent</option>
+                <option>School / college representative</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button class="btn btn--dark" type="submit">Claim My Spot <span class="arrow">→</span></button>
+            <p class="form-note">We'll reach out within 24 hours to schedule your simulation.</p>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div class="tick">✓</div>
+            <h3>You're on the list!</h3>
+            <p>Check your inbox — your free simulation details are on the way. Welcome to the edge.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <span class="eyebrow">Questions, answered</span>
+        <h2>FAQ</h2>
+      </div>
+      <div class="faq__list">
+        <details class="reveal">
+          <summary>Who is Altiora for?</summary>
+          <div class="answer">School students (grade 8+) and college students in any stream. Soft skills aren't a "business student thing" — engineers, doctors, designers and lawyers all rise or stall on them. We group cohorts by age and experience so every simulation feels challenging but fair.</div>
+        </details>
+        <details class="reveal">
+          <summary>Is this like a workshop or a lecture?</summary>
+          <div class="answer">Neither. Nobody sits and listens at Altiora. You're inside a running scenario — making calls, leading discussions, handling surprises. Lectures tell you about swimming; we put you in the (shallow, lifeguarded) pool.</div>
+        </details>
+        <details class="reveal">
+          <summary>What if a student is shy or introverted?</summary>
+          <div class="answer">Then this is built for them. Simulations are safe by design — mistakes cost nothing and feedback is private. Introverts often make the biggest visible leaps, because they finally get reps in a space with zero real-world consequences.</div>
+        </details>
+        <details class="reveal">
+          <summary>How do you measure improvement?</summary>
+          <div class="answer">Every participant gets a Soft-Skills Scorecard across communication, collaboration, leadership, adaptability and critical thinking — scored from observed behaviour in the simulation, not a self-quiz. Repeat cohorts can track growth over time, and institutions get batch-level analytics.</div>
+        </details>
+        <details class="reveal">
+          <summary>Can our school or college run this on campus?</summary>
+          <div class="answer">Yes — campus programs are our core offering. We bring the scenarios, mentors and materials; you bring the students and a room. Book a demo through the form above and we'll tailor a program to your batch size and calendar.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="logo" href="#top"><span class="logo__mark">▲</span>ALTIORA</a>
+        <p>Career simulations that mirror the real corporate world — so students build their edge before they need it.</p>
+        <p class="footer__tag">altiora — latin for "higher things." exactly where you're headed.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <a href="#what">What We Do</a>
+        <a href="#why">Why Soft Skills</a>
+        <a href="#proof">The Proof</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="footer__col">
+        <h4>Get Started</h4>
+        <a href="#join">Book a Free Simulation</a>
+        <a href="#join">Campus Programs</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>© 2026 Altiora. All rights reserved.</span>
+      <span>Turn soft skills into your bleeding edge.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // lead form
+  const form = document.getElementById('leadForm');
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    form.style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  });
+</script>
 </body>
 </html>
