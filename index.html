@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALTIORA — Turn Soft Skills Into Your Bleeding Edge</title>
   <meta name="description" content="Altiora runs career simulations that mirror real corporate life, so school and college students build the soft skills that become their unfair advantage." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23161616'/%3E%3Cpath d='M50 8 L58 42 L92 50 L58 58 L50 92 L42 58 L8 50 L42 42 Z' fill='%23c1fd42'/%3E%3C/svg%3E" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Altiora" />
+  <meta property="og:title" content="ALTIORA — Turn Soft Skills Into Your Bleeding Edge" />
+  <meta property="og:description" content="Career simulations that mirror real corporate life — so students build the soft skills no textbook teaches, before their career begins." />
+  <meta property="og:url" content="https://tygiugv.vercel.app/" />
+  <meta property="og:image" content="https://tygiugv.vercel.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ALTIORA — Turn Soft Skills Into Your Bleeding Edge" />
+  <meta name="twitter:description" content="Career simulations that mirror real corporate life — practice the job before the job." />
+  <meta name="twitter:image" content="https://tygiugv.vercel.app/og.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
@@ -506,6 +519,11 @@
     @media (max-width: 960px) {
       .hero__deck { grid-template-columns: 1fr; }
       .hero__right { max-width: 460px; margin-top: 10px; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(48px, 15.5vw, 62px); }
+      .sfx-toggle { font-size: 10px; padding: 6px 10px; bottom: 14px; left: 14px; }
+      .float-cta { font-size: 11px; padding: 10px 14px; bottom: 14px; right: 14px; }
     }
     @media (max-width: 640px) {
       .hero { padding-top: 124px; }
